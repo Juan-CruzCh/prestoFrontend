@@ -40,87 +40,60 @@ export const ListarCliente = () => {
 
   return (
    <>
-   <CrearClienteModal/>
-    <TableContainer component={Paper} style={{ maxWidth: 900, margin: '20px auto' }}>
-      <Table size="small"> {/* Hace que las filas sean más compactas */}
-        <TableHead>
-          <TableRow>
-            <TableCell sx={{ fontSize: '0.75rem' }}>
-              CI
-              <TextField
-                name="ci"
-                value={filtros.ci}
-                onChange={handleFiltroChange}
-                size="small"
-                placeholder="Buscar CI"
-                sx={{ fontSize: '0.75rem', mt: 0.5 }}
-              />
-            </TableCell>
-            <TableCell sx={{ fontSize: '0.75rem' }}>
-              Nombre
-              <TextField
-                name="nombre"
-                value={filtros.nombre}
-                onChange={handleFiltroChange}
-                size="small"
-                placeholder="Buscar nombre"
-                sx={{ fontSize: '0.75rem', mt: 0.5 }}
-              />
-            </TableCell>
-            <TableCell sx={{ fontSize: '0.75rem' }}>
-              Apellido Paterno
-              <TextField
-                name="apellidoPaterno"
-                value={filtros.apellidoPaterno}
-                onChange={handleFiltroChange}
-                size="small"
-                placeholder="Buscar apellido paterno"
-                sx={{ fontSize: '0.75rem', mt: 0.5 }}
-              />
-            </TableCell>
-            <TableCell sx={{ fontSize: '0.75rem' }}>
-              Apellido Materno
-              <TextField
-                name="apellidoMaterno"
-                value={filtros.apellidoMaterno}
-                onChange={handleFiltroChange}
-                size="small"
-                placeholder="Buscar apellido materno"
-                sx={{ fontSize: '0.75rem', mt: 0.5 }}
-              />
-            </TableCell>
-            <TableCell sx={{ fontSize: '0.75rem' }}>
-              Código Cliente
-              <TextField
-                name="codigoCliente"
-                value={filtros.codigoCliente}
-                onChange={handleFiltroChange}
-                size="small"
-                placeholder="Buscar código"
-                sx={{ fontSize: '0.75rem', mt: 0.5 }}
-              />
-            </TableCell>
-            <TableCell sx={{ fontSize: '0.75rem' }}>Acciones</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {clientesFiltrados.map((cliente, index) => (
-            <TableRow key={index}>
-              <TableCell sx={{ fontSize: '0.75rem' }}>{cliente.ci}</TableCell>
-              <TableCell sx={{ fontSize: '0.75rem' }}>{cliente.nombre}</TableCell>
-              <TableCell sx={{ fontSize: '0.75rem' }}>{cliente.apellidoPaterno}</TableCell>
-              <TableCell sx={{ fontSize: '0.75rem' }}>{cliente.apellidoMaterno}</TableCell>
-              <TableCell sx={{ fontSize: '0.75rem' }}>{cliente.codigoCliente}</TableCell>
-              <TableCell>
-                <Button variant="contained" color="primary" size="small">
-                  Seleccionar
-                </Button>
-              </TableCell>
-            </TableRow>
-          ))}
-        </TableBody>
-      </Table>
-    </TableContainer>
+     <div className="mb-6">
+          <h3 className="text-lg font-medium mb-3 text-gray-700">Clientes</h3>
+          <div className="overflow-x-auto border rounded-lg">
+            <table className="min-w-full divide-y divide-gray-200">
+              <thead className="bg-gray-100">
+                <tr>
+                  <th className="px-4 py-2 text-left text-sm font-medium text-gray-700">Seleccionar</th>
+                  <th className="px-4 py-2 text-left text-sm font-medium text-gray-700">
+                    Código Cliente
+                    <input type="text" placeholder="Buscar" className="mt-1 w-full p-1 border border-gray-300 rounded text-sm"/>
+                  </th>
+                  <th className="px-4 py-2 text-left text-sm font-medium text-gray-700">
+                    CI
+                    <input type="text" placeholder="Buscar" className="mt-1 w-full p-1 border border-gray-300 rounded text-sm"/>
+                  </th>
+                  <th className="px-4 py-2 text-left text-sm font-medium text-gray-700">
+                    Nombre
+                    <input type="text" placeholder="Buscar" className="mt-1 w-full p-1 border border-gray-300 rounded text-sm"/>
+                  </th>
+                  <th className="px-4 py-2 text-left text-sm font-medium text-gray-700">
+                    Apellido Paterno
+                    <input type="text" placeholder="Buscar" className="mt-1 w-full p-1 border border-gray-300 rounded text-sm"/>
+                  </th>
+                  <th className="px-4 py-2 text-left text-sm font-medium text-gray-700">
+                    Apellido Materno
+                    <input type="text" placeholder="Buscar" className="mt-1 w-full p-1 border border-gray-300 rounded text-sm"/>
+                  </th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-gray-200 bg-white">
+                <tr>
+                  <td className="px-4 py-2">
+                    <input type="radio" name="cliente" className="form-radio h-5 w-5 text-blue-600" />
+                  </td>
+                  <td className="px-4 py-2">C001</td>
+                  <td className="px-4 py-2">12345678</td>
+                  <td className="px-4 py-2">Juan</td>
+                  <td className="px-4 py-2">Pérez</td>
+                  <td className="px-4 py-2">Gómez</td>
+                </tr>
+                <tr>
+                  <td className="px-4 py-2">
+                    <input type="radio" name="cliente" className="form-radio h-5 w-5 text-blue-600" />
+                  </td>
+                  <td className="px-4 py-2">C002</td>
+                  <td className="px-4 py-2">87654321</td>
+                  <td className="px-4 py-2">María</td>
+                  <td className="px-4 py-2">López</td>
+                  <td className="px-4 py-2">Ramírez</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
    </>
   );
 };

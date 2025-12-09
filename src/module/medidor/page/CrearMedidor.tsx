@@ -16,11 +16,11 @@ export const CrearMedidor = () => {
     handleSubmit,
     formState: { errors },
     reset,
-  } = useForm();
+  } = useForm<any>();
 
-  const onSubmit = (data:any) => {
-  
-    reset(); // Limpiar formulario
+  const onSubmit = (data: any) => {
+    console.log(data); // Solo para prueba
+    reset();
     setClienteSeleccionado(null);
   };
 
@@ -29,18 +29,18 @@ export const CrearMedidor = () => {
       <div className="max-w-7xl mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-4">
           {/* Tabla de clientes */}
-          <div className="md:col-span-8 order-1">
+          <div className="md:col-span-8 order-1 md:order-1">
             <ListarCliente />
           </div>
 
           {/* Formulario */}
-          <div className="md:col-span-4 order-2">
-            <div className="bg-white rounded-lg shadow-md p-4">
+          <div className="md:col-span-4 order-2 md:order-2">
+            <div className="bg-white rounded-lg shadow-md p-6">
               <h2 className="text-xl font-bold mb-4">Crear Medidor</h2>
 
               <form onSubmit={handleSubmit(onSubmit)}>
                 {/* Número de Medidor */}
-                <div className="mb-3">
+                <div className="mb-4">
                   <label className="block text-sm font-medium text-gray-700 mb-1">
                     Número de Medidor *
                   </label>
@@ -52,12 +52,12 @@ export const CrearMedidor = () => {
                     }`}
                   />
                   {errors.numeroMedidor && (
-                    <p className="text-red-500 text-xs mt-1"></p>
+                    <p className="text-red-500 text-xs mt-1">{errors.numeroMedidor.message}</p>
                   )}
                 </div>
 
                 {/* Descripción */}
-                <div className="mb-3">
+                <div className="mb-4">
                   <label className="block text-sm font-medium text-gray-700 mb-1">Descripción</label>
                   <input
                     type="text"
@@ -67,7 +67,7 @@ export const CrearMedidor = () => {
                 </div>
 
                 {/* Tarifa */}
-                <div className="mb-3">
+                <div className="mb-4">
                   <label className="block text-sm font-medium text-gray-700 mb-1">
                     Tarifa *
                   </label>
@@ -84,11 +84,11 @@ export const CrearMedidor = () => {
                       </option>
                     ))}
                   </select>
-                  {errors.tarifa && <p className="text-red-500 text-xs mt-1"></p>}
+                  {errors.tarifa && <p className="text-red-500 text-xs mt-1">{errors.tarifa.message}</p>}
                 </div>
 
                 {/* Dirección */}
-                <div className="mb-3">
+                <div className="mb-4">
                   <label className="block text-sm font-medium text-gray-700 mb-1">
                     Dirección *
                   </label>
@@ -99,11 +99,11 @@ export const CrearMedidor = () => {
                       errors.direccion ? "border-red-500" : "border-gray-300"
                     }`}
                   />
-                  {errors.direccion && <p className="text-red-500 text-xs mt-1"></p>}
+                  {errors.direccion && <p className="text-red-500 text-xs mt-1">{errors.direccion.message}</p>}
                 </div>
 
                 {/* Fecha de instalación */}
-                <div className="mb-3">
+                <div className="mb-4">
                   <label className="block text-sm font-medium text-gray-700 mb-1">
                     Fecha de Instalación *
                   </label>
@@ -114,12 +114,12 @@ export const CrearMedidor = () => {
                       errors.fechaInstalacion ? "border-red-500" : "border-gray-300"
                     }`}
                   />
-                  {errors.fechaInstalacion && <p className="text-red-500 text-xs mt-1"></p>}
+                  {errors.fechaInstalacion && <p className="text-red-500 text-xs mt-1">{errors.fechaInstalacion.message}</p>}
                 </div>
 
                 <button
                   type="submit"
-                  className="w-full bg-green-500"
+                  className="w-full bg-green-500 text-white py-2 rounded-md hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-400 font-medium"
                 >
                   Guardar
                 </button>
