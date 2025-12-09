@@ -1,164 +1,254 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { Link, Outlet } from "react-router";
 import {
-    Menu,
-    BookOpen,
-    Users,
-    Wallet,
-    Gauge,
-    ChevronDown,
-    ChevronUp,
-    Droplets,
-    Plus,
-    List,
-    BarChart3,
-    Settings,
-    LogOut,
-} from "lucide-react";
+  Box,
+  Drawer,
+  List,
+  ListItemButton,
+  ListItemIcon,
+  ListItemText,
+  Collapse,
+  IconButton,
+  CssBaseline,
+  AppBar,
+  Toolbar,
+  Typography,
+  Avatar,
+} from "@mui/material";
+import {
+  Menu as MenuIcon,
+  ExpandLess,
+  ExpandMore,
+  Dashboard as DashboardIcon,
+  AccountBalanceWallet as WalletIcon,
+  Group as UsersIcon,
+  Book as BookOpenIcon,
+  Speed as GaugeIcon,
+  Add as PlusIcon,
+  List as ListIcon,
+  Settings as SettingsIcon,
+  Logout as LogoutIcon,
+} from "@mui/icons-material";
+
+const drawerWidth = 220;
+const mainColor = "#262442";
+const iconColor = "#ffffff";
 
 export const MenuComponent = () => {
-    const [drawerOpen, setDrawerOpen] = useState(true);
-    const [expandedMenus, setExpandedMenus] = useState({
-        medidor: false,
-        lecturas: false,
-    });
+  const [drawerOpen, setDrawerOpen] = useState(false); // iniciar cerrado
+  const [expandedMenus, setExpandedMenus] = useState({
+    medidor: false,
+    lecturas: false,
+    gastos: false,
+  });
 
-    const toggleDrawer = () => setDrawerOpen(!drawerOpen);
+  const toggleDrawer = () => setDrawerOpen(!drawerOpen);
+  const toggleSubmenu = (menu: "medidor" | "lecturas" | "gastos") => {
+    setExpandedMenus((prev) => ({ ...prev, [menu]: !prev[menu] }));
+  };
 
-    const toggleSubmenu = (menu: "medidor" | "lecturas") => {
-        setExpandedMenus((prev) => ({
-            ...prev,
-            [menu]: !prev[menu],
-        }));
-    };
+  const usuario = {
+    nombre: "Juan Carlos Chocllu",
+    rol: "Administrador",
+  };
 
-    const usuario = "Juan Carlos Chocllu";
+  return (
+    <Box sx={{ display: "flex" }}>
+      <CssBaseline />
 
-    return (
-        <div className="flex min-h-screen">
-            {/* Sidebar */}
-            <div
-                className={`${drawerOpen ? "w-72" : "w-0"} transition-all duration-300 bg-white border-r border-slate-200 overflow-hidden flex-shrink-0`}
-            >
-                {/* Header */}
-                <div className="p-6 bg-gradient-to-br from-blue-500 to-blue-600 flex flex-col gap-3">
+      {/* AppBar */}
+      <AppBar position="fixed" sx={{ zIndex: (theme) => theme.zIndex.drawer + 1, bgcolor: mainColor }}>
+        <Toolbar>
+          <IconButton
+            color="inherit"
+            edge="start"
+            onClick={toggleDrawer}
+            sx={{
+              mr: 2,
+              bgcolor: "white",
+              color: mainColor,
+              "&:hover": { bgcolor: "#eee" },
+              width: 36,
+              height: 36,
+            }}
+          >
+            <MenuIcon fontSize="small" />
+          </IconButton>
+          <Typography variant="subtitle1" noWrap component="div" sx={{ ml: 2 }}>
+            Sistema de Agua
+          </Typography>
+        </Toolbar>
+      </AppBar>
 
-                    <div className="flex items-center gap-3 mt-2 bg-white/10 backdrop-blur-sm rounded-lg p-3">
-                        <div className="w-10 h-10 bg-blue-300 text-blue-800 rounded-full flex items-center justify-center font-bold text-lg">
-                            {usuario[0]}
-                        </div>
-                        <span className="text-white font-medium text-sm">{usuario}</span>
-                    </div>
-                </div>
+      {/* Drawer con variant temporary para overlay */}
+      <Drawer
+        variant="temporary"
+        open={drawerOpen}
+        onClose={toggleDrawer} // cerrar al click fuera o esc
+        ModalProps={{
+          keepMounted: true, // mejora performance en móviles
+        }}
+        sx={{
+          "& .MuiDrawer-paper": {
+            width: drawerWidth,
+            bgcolor: mainColor,
+            color: iconColor,
+          },
+        }}
+      >
+        <Toolbar />
 
-                <div className="py-4">
-                    {/* Dashboard */}
-                    <button className="w-full my-1 mx-3 px-4 py-3 rounded-xl hover:bg-gradient-to-r hover:from-purple-50 hover:to-purple-100 transition-all flex items-center gap-3 text-left">
-                        <BarChart3 className="text-purple-600" size={22} />
-                        <span className="font-medium text-slate-700">Dashboard</span>
-                    </button>
+        {/* Panel de usuario */}
+        <Box sx={{ display: "flex", alignItems: "center", p: 2, bgcolor: "#1f1b3a", mb: 1, borderRadius: 1, mx: 1 }}>
+          <Avatar sx={{ bgcolor: "#1976d2", width: 36, height: 36, mr: 1 }}>{usuario.nombre.charAt(0)}</Avatar>
+          <Box>
+            <Typography sx={{ fontSize: 13, fontWeight: "bold", color: "#ffffff" }}>{usuario.nombre}</Typography>
+            <Typography sx={{ fontSize: 11, color: "#cccccc" }}>{usuario.rol}</Typography>
+          </Box>
+        </Box>
 
-                    {/* Medidor */}
-                    <button
-                        onClick={() => toggleSubmenu("medidor")}
-                        className={`w-full my-1 mx-3 px-4 py-3 rounded-xl transition-all flex items-center gap-3 text-left ${expandedMenus.medidor
-                            ? "bg-gradient-to-r from-blue-500 to-blue-600 text-white shadow-md"
-                            : "hover:bg-gradient-to-r hover:from-blue-50 hover:to-blue-100"
-                            }`}
-                    >
-                        <Gauge className={expandedMenus.medidor ? "text-white" : "text-blue-600"} size={22} />
-                        <span className={expandedMenus.medidor ? "font-semibold flex-1" : "font-medium text-slate-700 flex-1"}>
-                            Medidor
-                        </span>
-                        {expandedMenus.medidor ? <ChevronUp className="text-white" size={20} /> : <ChevronDown className="text-slate-600" size={20} />}
-                    </button>
-                    {expandedMenus.medidor && (
-                        <div className="bg-blue-50/50 mx-3 rounded-xl mt-1 mb-2 py-1">
-                            <button className="w-full pl-12 py-2 px-4 rounded-lg hover:bg-white transition-colors flex items-center gap-3 text-left">
-                                <Plus className="text-blue-600" size={18} />
-                                <Link to={"medidor"}>
+        <Box sx={{ overflow: "auto" }}>
+          <List sx={{ p: 0 }}>
+            {/* Dashboard */}
+            <ListItemButton component={Link} to="/dashboard" sx={{ color: iconColor, py: 0.5 }}>
+              <ListItemIcon sx={{ color: iconColor, minWidth: 32 }}>
+                <DashboardIcon fontSize="small" />
+              </ListItemIcon>
+              <ListItemText primary="Dashboard" slotProps={{ primary: { sx: { fontSize: 13 } } }} />
+            </ListItemButton>
 
-                                    <span className="text-sm text-slate-700">Crear</span>
-                                </Link>
-                            </button>
-                            <button className="w-full pl-12 py-2 px-4 rounded-lg hover:bg-white transition-colors flex items-center gap-3 text-left">
-                                <List className="text-blue-600" size={18} />
-                                <span className="text-sm text-slate-700">Listar</span>
-                            </button>
-                        </div>
-                    )}
+            {/* Medidor */}
+            <ListItemButton onClick={() => toggleSubmenu("medidor")} sx={{ color: iconColor, py: 0.5 }}>
+              <ListItemIcon sx={{ color: iconColor, minWidth: 32 }}>
+                <GaugeIcon fontSize="small" />
+              </ListItemIcon>
+              <ListItemText primary="Medidor" slotProps={{ primary: { sx: { fontSize: 13 } } }} />
+              {expandedMenus.medidor ? <ExpandLess /> : <ExpandMore />}
+            </ListItemButton>
+            <Collapse in={expandedMenus.medidor} timeout="auto" unmountOnExit>
+              <List component="div" disablePadding>
+                <ListItemButton sx={{ pl: 4, py: 0.5 }} component={Link} to="/crea/medidor">
+                  <ListItemIcon sx={{ color: iconColor, minWidth: 32 }}>
+                    <PlusIcon fontSize="small" />
+                  </ListItemIcon>
+                  <ListItemText primary="Crear" slotProps={{ primary: { sx: { fontSize: 12 } } }} />
+                </ListItemButton>
+                <ListItemButton sx={{ pl: 4, py: 0.5 }} component={Link} to="/listar/medidor">
+                  <ListItemIcon sx={{ color: iconColor, minWidth: 32 }}>
+                    <ListIcon fontSize="small" />
+                  </ListItemIcon>
+                  <ListItemText primary="Listar" slotProps={{ primary: { sx: { fontSize: 12 } } }} />
+                </ListItemButton>
 
-                    {/* Lecturas */}
-                    <button
-                        onClick={() => toggleSubmenu("lecturas")}
-                        className={`w-full my-1 mx-3 px-4 py-3 rounded-xl transition-all flex items-center gap-3 text-left ${expandedMenus.lecturas
-                            ? "bg-gradient-to-r from-emerald-500 to-emerald-600 text-white shadow-md"
-                            : "hover:bg-gradient-to-r hover:from-emerald-50 hover:to-emerald-100"
-                            }`}
-                    >
-                        <BookOpen className={expandedMenus.lecturas ? "text-white" : "text-emerald-600"} size={22} />
-                        <span className={expandedMenus.lecturas ? "font-semibold flex-1" : "font-medium text-slate-700 flex-1"}>
-                            Lecturas
-                        </span>
-                        {expandedMenus.lecturas ? <ChevronUp className="text-white" size={20} /> : <ChevronDown className="text-slate-600" size={20} />}
-                    </button>
-                    {expandedMenus.lecturas && (
-                        <div className="bg-emerald-50/50 mx-3 rounded-xl mt-1 mb-2 py-1">
-                            <button className="w-full pl-12 py-2 px-4 rounded-lg hover:bg-white transition-colors flex items-center gap-3 text-left">
-                                <Plus className="text-emerald-600" size={18} />
-                                <span className="text-sm text-slate-700">Crear</span>
-                            </button>
-                            <button className="w-full pl-12 py-2 px-4 rounded-lg hover:bg-white transition-colors flex items-center gap-3 text-left">
-                                <List className="text-emerald-600" size={18} />
-                                <span className="text-sm text-slate-700">Listar</span>
-                            </button>
-                        </div>
-                    )}
+                  <ListItemButton sx={{ pl: 4, py: 0.5 }} component={Link} to="/listar/medidores/morosos">
+                  <ListItemIcon sx={{ color: iconColor, minWidth: 32 }}>
+                    <ListIcon fontSize="small" />
+                  </ListItemIcon>
+                  <ListItemText primary="Medidores morosos" slotProps={{ primary: { sx: { fontSize: 12 } } }} />
+                </ListItemButton>
 
-                    {/* Usuarios */}
-                    <button className="w-full my-1 mx-3 px-4 py-3 rounded-xl hover:bg-gradient-to-r hover:from-amber-50 hover:to-amber-100 transition-all flex items-center gap-3 text-left">
-                        <Users className="text-amber-600" size={22} />
-                        <span className="font-medium text-slate-700">Usuarios</span>
-                    </button>
+              </List>
+            </Collapse>
 
-                    {/* Gastos */}
-                    <button className="w-full my-1 mx-3 px-4 py-3 rounded-xl hover:bg-gradient-to-r hover:from-rose-50 hover:to-rose-100 transition-all flex items-center gap-3 text-left">
-                        <Wallet className="text-rose-600" size={22} />
-                        <span className="font-medium text-slate-700">Gastos</span>
-                    </button>
+            {/* Lecturas */}
+            <ListItemButton onClick={() => toggleSubmenu("lecturas")} sx={{ color: iconColor, py: 0.5 }}>
+              <ListItemIcon sx={{ color: iconColor, minWidth: 32 }}>
+                <BookOpenIcon fontSize="small" />
+              </ListItemIcon>
+              <ListItemText primary="Lecturas" slotProps={{ primary: { sx: { fontSize: 13 } } }} />
+              {expandedMenus.lecturas ? <ExpandLess /> : <ExpandMore />}
+            </ListItemButton>
+            <Collapse in={expandedMenus.lecturas} timeout="auto" unmountOnExit>
+              <List component="div" disablePadding>
+                <ListItemButton sx={{ pl: 4, py: 0.5 }} component={Link} to="/lecturas/crear">
+                  <ListItemIcon sx={{ color: iconColor, minWidth: 32 }}>
+                    <PlusIcon fontSize="small" />
+                  </ListItemIcon>
+                  <ListItemText primary="Crear" slotProps={{ primary: { sx: { fontSize: 12 } } }} />
+                </ListItemButton>
+                <ListItemButton sx={{ pl: 4, py: 0.5 }} component={Link} to="/lecturas/listar">
+                  <ListItemIcon sx={{ color: iconColor, minWidth: 32 }}>
+                    <ListIcon fontSize="small" />
+                  </ListItemIcon>
+                  <ListItemText primary="Listar" slotProps={{ primary: { sx: { fontSize: 12 } } }} />
+                </ListItemButton>
+              </List>
+            </Collapse>
 
-                    {/* Divider */}
-                    <div className="my-4 mx-6 border-t border-slate-200"></div>
+            {/* Gastos */}
+            <ListItemButton onClick={() => toggleSubmenu("gastos")} sx={{ color: iconColor, py: 0.5 }}>
+              <ListItemIcon sx={{ color: iconColor, minWidth: 32 }}>
+                <WalletIcon fontSize="small" />
+              </ListItemIcon>
+              <ListItemText primary="Gastos" slotProps={{ primary: { sx: { fontSize: 13 } } }} />
+              {expandedMenus.gastos ? <ExpandLess /> : <ExpandMore />}
+            </ListItemButton>
+            <Collapse in={expandedMenus.gastos} timeout="auto" unmountOnExit>
+              <List component="div" disablePadding>
+                <ListItemButton sx={{ pl: 4, py: 0.5 }} component={Link} to="/gastos/crear">
+                  <ListItemIcon sx={{ color: iconColor, minWidth: 32 }}>
+                    <PlusIcon fontSize="small" />
+                  </ListItemIcon>
+                  <ListItemText primary="Registrar gasto" slotProps={{ primary: { sx: { fontSize: 12 } } }} />
+                </ListItemButton>
+                <ListItemButton sx={{ pl: 4, py: 0.5 }} component={Link} to="/gastos/listar">
+                  <ListItemIcon sx={{ color: iconColor, minWidth: 32 }}>
+                    <ListIcon fontSize="small" />
+                  </ListItemIcon>
+                  <ListItemText primary="Listar gastos" slotProps={{ primary: { sx: { fontSize: 12 } } }} />
+                </ListItemButton>
+                <ListItemButton sx={{ pl: 4, py: 0.5 }} component={Link} to="/gastos/categorias">
+                  <ListItemIcon sx={{ color: iconColor, minWidth: 32 }}>
+                    <DashboardIcon fontSize="small" />
+                  </ListItemIcon>
+                  <ListItemText primary="Categorías" slotProps={{ primary: { sx: { fontSize: 12 } } }} />
+                </ListItemButton>
+              </List>
+            </Collapse>
 
-                    {/* Settings */}
-                    <button className="w-full my-1 mx-3 px-4 py-3 rounded-xl hover:bg-gradient-to-r hover:from-slate-50 hover:to-slate-100 transition-all flex items-center gap-3 text-left">
-                        <Settings className="text-slate-600" size={22} />
-                        <span className="font-medium text-slate-700">Configuración</span>
-                    </button>
+            {/* Usuarios */}
+            <ListItemButton component={Link} to="/usuarios" sx={{ color: iconColor, py: 0.5 }}>
+              <ListItemIcon sx={{ color: iconColor, minWidth: 32 }}>
+                <UsersIcon fontSize="small" />
+              </ListItemIcon>
+              <ListItemText primary="Usuarios" slotProps={{ primary: { sx: { fontSize: 13 } } }} />
+            </ListItemButton>
 
-                    {/* Logout */}
-                    <button className="w-full my-1 mx-3 px-4 py-3 rounded-xl hover:bg-gradient-to-r hover:from-red-50 hover:to-red-100 transition-all flex items-center gap-3 text-left">
-                        <LogOut className="text-red-600" size={22} />
-                        <span className="font-medium text-slate-700">Cerrar Sesión</span>
-                    </button>
-                </div>
-            </div>
+            {/* Configuración */}
+            <ListItemButton component={Link} to="/configuracion" sx={{ color: iconColor, py: 0.5 }}>
+              <ListItemIcon sx={{ color: iconColor, minWidth: 32 }}>
+                <SettingsIcon fontSize="small" />
+              </ListItemIcon>
+              <ListItemText primary="Configuración" slotProps={{ primary: { sx: { fontSize: 13 } } }} />
+            </ListItemButton>
 
-            {/* Main Content */}
-            <div className="flex-1 relative">
-                {/* Botón hamburguesa */}
-                <button
-                    onClick={toggleDrawer}
+            {/* Cerrar sesión */}
+            <ListItemButton component={Link} to="/logout" sx={{ color: iconColor, py: 0.5 }}>
+              <ListItemIcon sx={{ color: iconColor, minWidth: 32 }}>
+                <LogoutIcon fontSize="small" />
+              </ListItemIcon>
+              <ListItemText primary="Cerrar sesión" slotProps={{ primary: { sx: { fontSize: 13 } } }} />
+            </ListItemButton>
+          </List>
+        </Box>
+      </Drawer>
 
-                >
-                    <Menu className="text-slate-700" size={24} />
-                </button>
-
-                {/* Outlet de React Router */}
-                <div className="pt-20 px-6">
-                    <Outlet />
-                </div>
-            </div>
-        </div>
-    );
+      {/* Contenido principal sin margen ni cambio de tamaño */}
+      <Box
+        component="main"
+        sx={{
+          flexGrow: 1,
+          p: 2,
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "flex-start",
+          minHeight: "100vh",
+          pt: 10,
+          boxSizing: "border-box",
+        }}
+      >
+        <Outlet />
+      </Box>
+    </Box>
+  );
 };
