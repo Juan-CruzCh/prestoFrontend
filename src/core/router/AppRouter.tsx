@@ -7,6 +7,8 @@ import { CrearLecturaPage } from '../../module/lectura/page/CrearLecturaPage'
 import { RealizarPagoPage } from '../../module/pago/page/RealizarPagoPage'
 import { ListarPagosPage } from '../../module/pago/page/ListarPagosPage'
 import { ListarLecturaPage } from '../../module/lectura/page/ListarLecturaPage'
+import { ListarTarifaPage } from '../../module/tarifa/page/ListarTarifaPage'
+import { CrearTarifaPage } from '../../module/tarifa/page/CrearTarifaPage'
 export const AppRouter = () => {
     return (
         <BrowserRouter>
@@ -15,11 +17,13 @@ export const AppRouter = () => {
 
                     <Route path="crea/medidor" element={<CrearMedidor />} />
                     <Route path="listar/medidor" element={<ListarMedidores />} />
-                       <Route path="listar/medidores/morosos" element={<ListarMedidoresMorosos />} />
-                       <Route path="crear/lectura" element={<CrearLecturaPage />} />
-                           <Route path="listar/lectura" element={<ListarLecturaPage />} />
-                             <Route path="realizar/pago" element={<RealizarPagoPage />} />
-                                    <Route path="listar/pago" element={<ListarPagosPage />} />
+                    <Route path="listar/medidores/morosos" element={<ListarMedidoresMorosos />} />
+                    <Route path="crear/lectura" element={<CrearLecturaPage />} />
+                    <Route path="listar/lectura" element={<ListarLecturaPage />} />
+                    <Route path="realizar/pago" element={<RealizarPagoPage />} />
+                    <Route path="listar/pago" element={<ListarPagosPage />} />
+                    <Route path="listar/tarifas" element={<ListarTarifaPage />} />
+                    <Route path="crear/tarifas" element={<CrearTarifaPage />} />
                 </Route>
             </Routes>
         </BrowserRouter>

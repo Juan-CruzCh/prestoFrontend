@@ -1,15 +1,25 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { ListarCliente } from "../../cliente/components/ListarCliente";
+import type { listarTarifasI } from "../../tarifa/interface/tarifa";
+import { listarTarifas } from "../../tarifa/service/tarifaService";
 
-const tarifas = [
-  { id: "1", nombre: "Tarifa Básica" },
-  { id: "2", nombre: "Tarifa Premium" },
-  { id: "3", nombre: "Tarifa Industrial" },
-];
+
 
 export const CrearMedidor = () => {
   const [clienteSeleccionado, setClienteSeleccionado] = useState(null);
+  const [tarifas, setTarifas] = useState<listarTarifasI[]>([]);
+
+  useEffect(() => {
+    (async () => {
+      try {
+        const response = await listarTarifas()
+        setTarifas(response)
+      } catch (error) {
+
+      }
+    })()
+  }, [])
 
   const {
     register,
@@ -47,9 +57,8 @@ export const CrearMedidor = () => {
                   <input
                     type="text"
                     {...register("numeroMedidor", { required: "El número de medidor es obligatorio" })}
-                    className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 ${
-                      errors.numeroMedidor ? "border-red-500" : "border-gray-300"
-                    }`}
+                    className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 ${errors.numeroMedidor ? "border-red-500" : "border-gray-300"
+                      }`}
                   />
                   {errors.numeroMedidor && (
                     <p className="text-red-500 text-xs mt-1">{errors.numeroMedidor.message}</p>
@@ -73,13 +82,12 @@ export const CrearMedidor = () => {
                   </label>
                   <select
                     {...register("tarifa", { required: "La tarifa es obligatoria" })}
-                    className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 ${
-                      errors.tarifa ? "border-red-500" : "border-gray-300"
-                    }`}
+                    className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 ${errors.tarifa ? "border-red-500" : "border-gray-300"
+                      }`}
                   >
                     <option value="">Seleccione una tarifa</option>
                     {tarifas.map((t) => (
-                      <option key={t.id} value={t.id}>
+                      <option key={t._id} value={t._id}>
                         {t.nombre}
                       </option>
                     ))}
@@ -95,9 +103,8 @@ export const CrearMedidor = () => {
                   <input
                     type="text"
                     {...register("direccion", { required: "La dirección es obligatoria" })}
-                    className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 ${
-                      errors.direccion ? "border-red-500" : "border-gray-300"
-                    }`}
+                    className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 ${errors.direccion ? "border-red-500" : "border-gray-300"
+                      }`}
                   />
                   {errors.direccion && <p className="text-red-500 text-xs mt-1">{errors.direccion.message}</p>}
                 </div>
@@ -110,9 +117,8 @@ export const CrearMedidor = () => {
                   <input
                     type="date"
                     {...register("fechaInstalacion", { required: "La fecha de instalación es obligatoria" })}
-                    className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 ${
-                      errors.fechaInstalacion ? "border-red-500" : "border-gray-300"
-                    }`}
+                    className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 ${errors.fechaInstalacion ? "border-red-500" : "border-gray-300"
+                      }`}
                   />
                   {errors.fechaInstalacion && <p className="text-red-500 text-xs mt-1">{errors.fechaInstalacion.message}</p>}
                 </div>

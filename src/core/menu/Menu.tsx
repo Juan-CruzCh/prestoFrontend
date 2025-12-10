@@ -42,10 +42,11 @@ export const MenuComponent = () => {
     lecturas: false,
     gastos: false,
     pagos: false,
+    tarifa: false,
   });
 
   const toggleDrawer = () => setDrawerOpen(!drawerOpen);
-  const toggleSubmenu = (menu: "medidor" | "lecturas" | "gastos" | "pagos") => {
+  const toggleSubmenu = (menu: "medidor" | "lecturas" | "gastos" | "pagos" | "tarifa") => {
     setExpandedMenus((prev) => ({ ...prev, [menu]: !prev[menu] }));
   };
 
@@ -251,6 +252,40 @@ export const MenuComponent = () => {
               </List>
             </Collapse>
 
+
+            <ListItemButton
+              onClick={() => toggleSubmenu("tarifa")}
+              sx={{ color: iconColor, py: 0.5 }}
+            >
+              <ListItemIcon sx={{ color: iconColor, minWidth: 32 }}>
+                <CreditCard fontSize="small" />
+              </ListItemIcon>
+              <ListItemText
+                primary="Tarifa"
+                slotProps={{ primary: { sx: { fontSize: 13 } } }}
+              />
+              {expandedMenus.tarifa ? <ExpandLess /> : <ExpandMore />}
+            </ListItemButton>
+            <Collapse in={expandedMenus.tarifa} timeout="auto" unmountOnExit>
+              <List component="div" disablePadding>
+                <ListItemButton
+                  sx={{ pl: 4, py: 0.5 }}
+                  component={Link}
+                  to="/listar/tarifas"
+                >
+                  <ListItemIcon sx={{ color: iconColor, minWidth: 32 }}>
+                    <PlusIcon fontSize="small" />
+                  </ListItemIcon>
+                  <ListItemText
+                    primary="Listar tarifas"
+                    slotProps={{ primary: { sx: { fontSize: 12 } } }}
+                  />
+                </ListItemButton>
+
+              </List>
+            </Collapse>
+
+
             {/* Gastos */}
             <ListItemButton
               onClick={() => toggleSubmenu("gastos")}
@@ -352,6 +387,8 @@ export const MenuComponent = () => {
                 </ListItemButton>
               </List>
             </Collapse>
+
+
 
             {/* Usuarios */}
             <ListItemButton
