@@ -8,8 +8,11 @@ interface AuthStore {
 export const useAuthStore  = create<AuthStore>((set)=>({
     loading:false,
     user:null,
+
     verificarAuth : async ()=>{
         try {
+            console.log('verificando login');
+            
             const response = await verificarLogin()
             console.log(response);
                set({ user: response, loading: false })
