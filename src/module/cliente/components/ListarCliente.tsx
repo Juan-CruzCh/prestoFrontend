@@ -7,7 +7,7 @@ import { confirmarEliminar } from '../../../core/utils/alertasUtils';
 
 
 
-export function  ListarCliente  ({ onClienteSeleccionado }:{  onClienteSeleccionado: (cliente: ListarClienteI) => void;})  {
+export function ListarCliente({ onClienteSeleccionado }: { onClienteSeleccionado: (cliente: ListarClienteI) => void; }) {
   const [codigo, setCodigo] = useState('');
   const [ci, setCi] = useState('');
   const [nombre, setNombre] = useState('');
@@ -21,11 +21,11 @@ export function  ListarCliente  ({ onClienteSeleccionado }:{  onClienteSeleccion
 
   const listarClientes = async () => {
     try {
-      const res: ResultadoHttp<ListarClienteI> = await listarClientesService(
+      const response = await listarClientesService(
         codigo, ci, nombre, apellidoPaterno, apellidoMaterno, pagina
       );
-      setPaginas(res.paginas);
-      setClientes(res.data);
+      setPaginas(response.paginas);
+      setClientes(response.data);
     } catch (err) {
       console.error('Error al listar clientes', err);
     }
@@ -39,7 +39,7 @@ export function  ListarCliente  ({ onClienteSeleccionado }:{  onClienteSeleccion
     setPagina(newPage);
   };
 
-;
+
 
   const handleEliminar = async (cliente: ListarClienteI) => {
     const confirmacion = await confirmarEliminar(cliente.nombre);
@@ -125,6 +125,7 @@ export function  ListarCliente  ({ onClienteSeleccionado }:{  onClienteSeleccion
             </tr>
           </thead>
           <tbody className="divide-y divide-gray-200 bg-white">
+
             {clientes.map((item) => (
               <tr key={item._id}>
                 <td className="px-4 py-2">

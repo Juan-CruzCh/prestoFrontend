@@ -2,7 +2,7 @@ import { instance } from '../../../core/config/instanceAxios';
 import type { UpdateUsuarioI } from '../../usuario/interface/usuario';
 
 
-export async function login(usuarioInput: string, password: string): Promise<any> {
+export async function login(usuarioInput: string, password: string): Promise<{ token: String }> {
     const response = await instance.post('autenticacion', { usuario: usuarioInput, password });
     return response.data;
 }
