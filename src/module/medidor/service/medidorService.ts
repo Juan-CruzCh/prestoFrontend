@@ -1,3 +1,4 @@
+import type { AxiosResponse } from 'axios';
 import { instance } from '../../../core/config/instanceAxios';
 import type { ResultadoHttp } from '../../../core/interface/ResultadoHttp';
 import type {
@@ -6,9 +7,9 @@ import type {
   MedidorClienteI
 } from '../interface/medidor';
 
-export async function crearMedidor(data: FormularioMedidorI): Promise<any> {
-  const response = await instance.post<any>('medidor', data);
-  return response.data;
+export async function crearMedidor(data: FormularioMedidorI): Promise<AxiosResponse> {
+  const response = await instance.post<AxiosResponse>('medidor', data);
+  return response;
 }
 
 

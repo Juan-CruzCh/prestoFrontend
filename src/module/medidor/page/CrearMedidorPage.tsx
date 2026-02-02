@@ -5,6 +5,10 @@ import type { ListarClienteI } from "../../cliente/interface/cliente"
 import type { FormularioMedidorI } from "../interface/medidor"
 import { listarTarifas } from "../../tarifa/service/tarifaService"
 import type { ListarTarifasI } from "../../tarifa/interface/tarifa"
+import { crearMedidor } from "../service/medidorService"
+import { HttpStatus } from "../../../core/enum/httpSatatus"
+import { exito } from "../../../core/utils/alertasUtils"
+import type { AxiosError } from "axios"
 
 export const CrearMedidorPage = () => {
 
@@ -23,12 +27,27 @@ export const CrearMedidorPage = () => {
         listartarifa()
     }, [])
 
-    const onSubmit = (data: FormularioMedidorI) => {
+    const onSubmit = async (data: FormularioMedidorI) => {
+        try {
+            if (cliente) {
+                data.cliente = cliente._id
+                data.fechaInstalacion = new Date(`${data.fechaInstalacion}T${new Date().toTimeString().slice(0, 8)}`).toISOString()
+                console.log(data);
+
+                const response = await crearMedidor(data)
+                if (response.status == HttpStatus.CREATED) {
+                    exito("Registrado")
+                    reset()
+                }
+
+            }
+            setClienteError(false)
+        } catch (error) {
+            const e = error as AxiosError<any>
+            console.log(e.response);
 
 
-        reset()
-
-        setClienteError(false)
+        }
     }
 
     const listartarifa = async () => {
@@ -47,18 +66,17 @@ export const CrearMedidorPage = () => {
         <div className="w-full p-4 bg-gray-50 min-h-screen">
             <div className="max-w-full mx-auto grid grid-cols-1 md:grid-cols-12 gap-4">
 
-                {/* IZQUIERDA */}
+          
                 <div className="col-span-8">
 
                     <ListarCliente onClienteSeleccionado={setCliente} />
                 </div>
 
-                {/* DERECHA */}
                 <div className="md:col-span-4">
                     <div className="bg-white rounded-lg shadow-md p-6">
                         <h2 className="text-xl font-bold mb-4">Crear Medidor</h2>
 
-                        {/* CLIENTE */}
+           
                         <div className="bg-gray-50 border rounded-lg p-4 mb-6">
                             <h3 className="text-sm font-semibold mb-3">Datos del Cliente</h3>
 
@@ -94,10 +112,10 @@ export const CrearMedidorPage = () => {
                             )}
                         </div>
 
-                        {/* FORM */}
+                    
                         <form onSubmit={handleSubmit(onSubmit)}>
 
-                            {/* Número Medidor */}
+                         
                             <div className="mb-4">
                                 <label className="block text-sm font-medium mb-1">Número de Medidor *</label>
                                 <input
@@ -113,7 +131,7 @@ export const CrearMedidorPage = () => {
                                 )}
                             </div>
 
-                            {/* Descripción */}
+                      
                             <div className="mb-4">
                                 <label className="block text-sm font-medium mb-1">Descripción *</label>
                                 <input
@@ -128,7 +146,7 @@ export const CrearMedidorPage = () => {
                                 )}
                             </div>
 
-                            {/* Tarifa */}
+                           
                             <div className="mb-4">
                                 <label className="block text-sm font-medium mb-1">Tarifa *</label>
                                 <select
@@ -146,7 +164,6 @@ export const CrearMedidorPage = () => {
                                 )}
                             </div>
 
-                            {/* Dirección */}
                             <div className="mb-4">
                                 <label className="block text-sm font-medium mb-1">Dirección *</label>
                                 <input
@@ -162,7 +179,7 @@ export const CrearMedidorPage = () => {
                                 )}
                             </div>
 
-                            {/* Fecha */}
+                           
                             <div className="mb-4">
                                 <label className="block text-sm font-medium mb-1">Fecha de Instalación *</label>
                                 <input

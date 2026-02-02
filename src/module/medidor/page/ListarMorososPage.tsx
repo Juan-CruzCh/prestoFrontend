@@ -9,7 +9,7 @@ import { listarMedidorClienteService } from "../service/medidorService";
 
 
 
-export const ListarMedidorPage = () => {
+export const ListarMorososPage = () => {
   const [listarMedidorClientes, setListarMedidorClientes] = useState<ListarMedidorClientesI[]>([]);
   const [tarifas, setTarifas] = useState<ListarTarifasI[]>([]);
   const [codigo, setCodigo] = useState("");
@@ -32,20 +32,18 @@ export const ListarMedidorPage = () => {
 
   const listarMedidorCliente = async () => {
     try {
-      const  data  = await listarMedidorClienteService(codigo, ci, nombre, apellidoPaterno, apellidoMaterno, numeroMedidor, tarifa, estado , "")
-     console.log(data);
-     
+      const data = await listarMedidorClienteService(codigo, ci, nombre, apellidoPaterno, apellidoMaterno, numeroMedidor, tarifa, estado, "moroso")
       setListarMedidorClientes(data.data);
 
     } catch (err) {
-    
+
       console.error("Error al listar medidores", err);
     }
   };
 
   const tarifasListar = async () => {
     try {
-      const  data  = await listarTarifas();
+      const data = await listarTarifas();
       setTarifas(data);
     } catch (err) {
       console.error("Error al listar tarifas", err);
@@ -120,7 +118,7 @@ export const ListarMedidorPage = () => {
                   </th>
                 </tr>
                 <tr>
-                  {["Código Cliente","CI","Nombre","Apellido Paterno","Apellido Materno","Dirección","Número de Medidor","Tarifa","Estado","Acción"].map((header, i) => (
+                  {["Código Cliente", "CI", "Nombre", "Apellido Paterno", "Apellido Materno", "Dirección", "Número de Medidor", "Tarifa", "Estado", "Lecturas Pendientes"].map((header, i) => (
                     <th key={i} className="px-4 py-2 text-left font-medium text-gray-700">{header}</th>
                   ))}
                 </tr>
@@ -140,14 +138,13 @@ export const ListarMedidorPage = () => {
                       <span className="px-2 py-1 bg-green-100 text-green-700 rounded text-xs font-medium">{item.estado}</span>
                     </td>
                     <td className="px-4 py-2 flex gap-2">
-                      <button onClick={() => eliminar(item)} className="bg-red-600 text-white px-3 py-1 rounded text-xs">Eliminar</button>
-                      <button onClick={() => navigate(`/medidor/editar/${item._id}`)} className="bg-blue-600 text-white px-3 py-1 rounded hover:bg-blue-700 text-xs">Editar</button>
+                      {item.lecturasPendientes}
                     </td>
                   </tr>
                 ))}
               </tbody>
             </table>
-           
+
           </div>
         </div>
       </div>

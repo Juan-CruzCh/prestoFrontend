@@ -2,6 +2,7 @@ import type { RouterI } from "../../../core/interface/router";
 import { CrearMedidorPage } from "../page/CrearMedidorPage";
 import { EditarMedidorPage } from "../page/EditarMedidorPage";
 import { ListarMedidorPage } from "../page/ListarMedidorPage";
+import { ListarMorososPage } from "../page/ListarMorososPage";
 
 export const medidorRouter: RouterI[] = [
     {
@@ -15,6 +16,10 @@ export const medidorRouter: RouterI[] = [
     {
         path:'/medidor/editar/:id',
         element:EditarMedidorPage
+    },
+    {
+        path:'/medidor/moroso',
+        element:ListarMorososPage
     }
 
 ];
