@@ -4,7 +4,7 @@ import type { UsuarioPerfilI } from "../../module/usuario/interface/usuario";
 interface AuthStore {
     usuario: UsuarioPerfilI | null;
     loading: boolean;
-    isAutenticaicon: boolean;
+    isAutenticacion: boolean;
     verificarAuth: () => Promise<void>;
 }
 export const useAuthStore = create<AuthStore>((set) => ({
@@ -18,21 +18,21 @@ export const useAuthStore = create<AuthStore>((set) => ({
         rol: '',
         usuario: ''
     },
-    isAutenticaicon: false,
+    isAutenticacion: false,
     verificarAuth: async () => {
         try {
             const url = window.location.pathname
-            console.log(url);
+
             if (url != '/') {
                 const response = await verificarLogin()
                 if (response) {
-                    set({ usuario: response, isAutenticaicon: true })
+                    set({ usuario: response, isAutenticacion: true })
                 }
             }
 
 
         } catch (error) {
-            set({ usuario: null, isAutenticaicon: false })
+            set({ usuario: null, isAutenticacion: false })
         }
 
     }

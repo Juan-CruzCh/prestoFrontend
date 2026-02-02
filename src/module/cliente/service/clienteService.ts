@@ -1,3 +1,4 @@
+import type { AxiosResponse } from "axios";
 import { instance } from "../../../core/config/instanceAxios";
 import type { ResultadoHttp } from "../../../core/interface/ResultadoHttp";
 import type { CrearClienteI, ListarClienteI } from "../interface/cliente";
@@ -23,12 +24,12 @@ export async function crearCliente(data: CrearClienteI): Promise<ListarClienteI>
 }
 
 
-export async function editarCliente(data: CrearClienteI, id: string): Promise<ListarClienteI> {
+export async function editarCliente(data: CrearClienteI, id: string): Promise<AxiosResponse> {
   const response = await instance.patch<ListarClienteI>(`cliente/${id}`, data);
-  return response.data;
+  return response;
 }
 
-export async function eliminarCliente(id: string): Promise<ListarClienteI> {
+export async function eliminarCliente(id: string): Promise<AxiosResponse> {
   const response = await instance.delete<ListarClienteI>(`cliente/${id}`);
-  return response.data;
+  return response;
 }

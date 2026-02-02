@@ -3,11 +3,18 @@ import React, { useState, useEffect } from 'react';
 import { listarClientes as listarClientesService, eliminarCliente as eliminarClienteService } from '../service/clienteService';
 import type { ListarClienteI } from '../interface/cliente';
 
-import { confirmarEliminar } from '../../../core/utils/alertasUtils';
+import { confirmarEliminar, error } from '../../../core/utils/alertasUtils';
+import { CrearClienteModal } from './CrearClienteModal';
+import { useEstadoReload } from '../../../core/utils/useEstadoReloadUtils';
+import { EditarClienteModal } from './EditarClienteModal';
+import { useEstadoModal } from '../../../core/utils/useEstadoModalUtil';
+import type { AxiosError } from 'axios';
+import { HttpStatus } from '../../../core/enum/httpSatatus';
 
 
 
 export function ListarCliente({ onClienteSeleccionado }: { onClienteSeleccionado: (cliente: ListarClienteI) => void; }) {
+  const { openModal, isOpen } = useEstadoModal()
   const [codigo, setCodigo] = useState('');
   const [ci, setCi] = useState('');
   const [nombre, setNombre] = useState('');
@@ -17,9 +24,10 @@ export function ListarCliente({ onClienteSeleccionado }: { onClienteSeleccionado
   const [paginas, setPaginas] = useState(0);
   const [clientes, setClientes] = useState<ListarClienteI[]>([]);
   const [editarCliente, setEditarCliente] = useState<ListarClienteI | null>(null);
-  const [mostrarModal, setMostrarModal] = useState(false);
 
+  const { isReloading, triggerReload } = useEstadoReload()
   const listarClientes = async () => {
+
     try {
       const response = await listarClientesService(
         codigo, ci, nombre, apellidoPaterno, apellidoMaterno, pagina
@@ -33,7 +41,7 @@ export function ListarCliente({ onClienteSeleccionado }: { onClienteSeleccionado
 
   useEffect(() => {
     listarClientes();
-  }, [pagina]);
+  }, [isReloading]);
 
   const handlePageChange = (newPage: number) => {
     setPagina(newPage);
@@ -45,22 +53,26 @@ export function ListarCliente({ onClienteSeleccionado }: { onClienteSeleccionado
     const confirmacion = await confirmarEliminar(cliente.nombre);
     if (!confirmacion) return;
     try {
-      await eliminarClienteService(cliente._id);
-      listarClientes();
-    } catch {
-      alert('Ocurrió un error al eliminar el cliente');
+      const response=  await eliminarClienteService(cliente._id);
+      if(response.status == HttpStatus.OK){
+        triggerReload()
+      }
+    } catch (err) {
+      const e = err as AxiosError<any>
+      error(e.response?.data.mensaje)
     }
   };
 
   const handleActualizar = (cliente: ListarClienteI) => {
     setEditarCliente(cliente);
-    setMostrarModal(true);
+    openModal()
   };
 
   return (
     <div className="mb-6">
       <h3 className="text-lg font-medium mb-3 text-gray-700">Clientes</h3>
       <div className="overflow-x-auto rounded-lg">
+        <CrearClienteModal setCliente={onClienteSeleccionado} />
         <table className="min-w-full divide-y divide-gray-200">
           <thead className="bg-gray-100">
             <tr>
@@ -175,13 +187,12 @@ export function ListarCliente({ onClienteSeleccionado }: { onClienteSeleccionado
         </div>
       </div>
 
-      {/*mostrarModal && editarCliente && (
+      {isOpen && editarCliente && (
         <EditarClienteModal
           cliente={editarCliente}
-          onClose={() => setMostrarModal(false)}
-          onActualizar={() => listarClientes()}
+
         />
-      )*/}
+      )}
     </div>
   );
 };
