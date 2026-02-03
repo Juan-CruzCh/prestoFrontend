@@ -1,10 +1,13 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { useForm, Controller } from "react-hook-form";
-import type { FormularioRango, TarifaI } from "../interface/tarifa";
+import type { FormularioRango, RangoI, TarifaI } from "../interface/tarifa";
 import { crearTarifa } from "../service/tarifaService";
+import { HttpStatus } from "../../../core/enum/httpSatatus";
+import { AxiosError } from "axios";
+import { error } from "../../../core/utils/alertasUtils";
 
 
-export const CrearTarifaPage: React.FC = () => {
+export const CrearTarifaPage = () => {
   const { handleSubmit, control, watch, reset, formState: { errors } } = useForm<FormularioRango>({
     defaultValues: {
       nombre: "",
@@ -15,19 +18,19 @@ export const CrearTarifaPage: React.FC = () => {
     }
   });
 
-  const [rangos, setRangos] = useState<FormularioRango[]>([]);
+  const [rangos, setRangos] = useState<RangoI[]>([]);
 
   const agregarRango = (data: FormularioRango) => {
     setRangos(prev => [
       ...prev,
       {
-        rango1: data.rango1,
-        rango2: data.rango2,
         costo: data.costo,
-        iva: data.iva
+        iva: data.iva,
+        rango1: data.rango1,
+        rango2: data.rango2
       }
     ]);
-    // Limpiar campos de rango
+
     reset({ ...watch(), rango1: 0, rango2: 0, costo: 0, iva: 0 });
   };
 
@@ -36,23 +39,23 @@ export const CrearTarifaPage: React.FC = () => {
   };
 
   const guardarTarifa = async (data: FormularioRango) => {
-    if (!data.nombre || rangos.length === 0) {
-      alert("Nombre y al menos un rango son obligatorios");
-      return;
-    }
+
 
     const tarifa: TarifaI = {
       nombre: data.nombre.toUpperCase(),
       rango: rangos
     };
-
+    
     try {
       const response = await crearTarifa(tarifa);
-      console.log("Tarifa creada:", response.data);
-      reset();
-      setRangos([]);
+      if (response.status == HttpStatus.CREATED) {
+        reset();
+        setRangos([]);
+      }
+
     } catch (err) {
-      console.error("Error al guardar tarifa", err);
+      const e = err as AxiosError<any>
+      error(e.response?.data.mensaje)
     }
   };
 

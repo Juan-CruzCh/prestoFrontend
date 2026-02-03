@@ -19,8 +19,6 @@ export async function registrarLectura(data: FormularioLecturaI): Promise<any> {
 
 
 export async function listarLecturasService(fechaInicio: string, fechaFin: string): Promise<ListarLecturaMedidorI[]> {
-  console.log(fechaInicio, fechaFin);
-  
   const response = await instance.post<ListarLecturaMedidorI[]>(`lectura/listar`, {
     fechaInicio,
     fechaFin

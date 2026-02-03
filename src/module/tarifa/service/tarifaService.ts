@@ -1,10 +1,11 @@
+import type { AxiosResponse } from 'axios';
 import { instance } from '../../../core/config/instanceAxios';
 import type { TarifaI, ListarTarifasI, ListarTarifasRangoI } from '../interface/tarifa';
 
 
-export async function crearTarifa(data: TarifaI): Promise<any> {
+export async function crearTarifa(data: TarifaI): Promise<AxiosResponse> {
   const response = await instance.post('tarifa', data);
-  return response.data;
+  return response;
 }
 
 
@@ -19,13 +20,13 @@ export async function listarTarifas(): Promise<ListarTarifasI[]> {
 }
 
 
-export async function eliminarTarifaService(id: string): Promise<any> {
+export async function eliminarTarifaService(id: string): Promise<AxiosResponse> {
   const response = await instance.delete<any>(`tarifa/${id}`);
-  return response.data;
+  return response;
 }
 
 
-export async function eliminarRangoService(id: string): Promise<any> {
+export async function eliminarRangoService(id: string): Promise<AxiosResponse> {
   const response = await instance.delete<any>(`tarifa/rango/${id}`);
-  return response.data;
+  return response;
 }

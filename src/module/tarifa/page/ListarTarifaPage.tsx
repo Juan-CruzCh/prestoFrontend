@@ -1,68 +1,61 @@
 import React, { useEffect, useState } from "react";
 
-import axios from "axios";
-import { data, useNavigate } from "react-router";
+import { AxiosError } from "axios";
+import { useNavigate } from "react-router";
 import { eliminarRangoService, eliminarTarifaService, listarTarifasRangos } from "../service/tarifaService";
-import { confirmarEliminar } from "../../../core/utils/alertasUtils";
+import { confirmarEliminar, error } from "../../../core/utils/alertasUtils";
+import { useEstadoReload } from "../../../core/utils/useEstadoReloadUtils";
+import { HttpStatus } from "../../../core/enum/httpSatatus";
+import type { ListarTarifasRangoI, TarifaRango } from "../interface/tarifa";
 
-interface TarifaRango {
-  _id: string;
-  rango1: number;
-  rango2: number;
-  costo: number;
-  iva: number;
-}
 
-interface ListarTarifasRangoI {
-  _id: string;
-  nombre: string;
-  rango: TarifaRango[];
-}
 
 export const ListarTarifaPage: React.FC = () => {
   const [tarifas, setTarifas] = useState<ListarTarifasRangoI[]>([]);
+  const { isReloading, triggerReload } = useEstadoReload()
   const navigate = useNavigate();
 
   useEffect(() => {
     listarTarifas();
-  }, []);
+  }, [isReloading]);
 
   const listarTarifas = async () => {
     try {
-      const data  = await listarTarifasRangos();
+      const data = await listarTarifasRangos();
       setTarifas(data);
     } catch (err) {
-      console.error("Error al listar tarifas", err);
+      const e = err as AxiosError<any>
+      error(e.response?.data.mensaje)
+
     }
   };
 
   const eliminarTarifa = async (tarifa: ListarTarifasRangoI) => {
-    const confirmacion = confirmarEliminar(tarifa.nombre)
-    if(!confirmacion) return
+    const confirmacion = await confirmarEliminar(tarifa.nombre)
+    if (!confirmacion) return
 
     try {
-      const { data } = await eliminarTarifaService(tarifa._id);
-      if (data.MatchedCount > 0) {
-       
+      const data = await eliminarTarifaService(tarifa._id);
+      if (data.status == HttpStatus.OK) {
+        triggerReload()
       }
     } catch (err) {
-      alert("Ocurrió un error al eliminar la tarifa");
-      console.error(err);
+      const e = err as AxiosError<any>
+      error(e.response?.data.mensaje)
     }
   };
 
   const eliminarRango = async (rango: TarifaRango) => {
-     const confirmacion = confirmarEliminar(`${rango.rango1} - ${rango.rango2}`)
-    if(!confirmacion) return
-
+    const confirmacion = await confirmarEliminar(`${rango.rango1} - ${rango.rango2}`)
+    if (!confirmacion) return
     try {
-      const { data } = await eliminarRangoService(rango._id);
-      if (data.MatchedCount > 0) {
-        listarTarifas();
+      const data = await eliminarRangoService(rango._id);
+      if (data.status == HttpStatus.OK) {
+        triggerReload()
       }
     } catch (err) {
-      alert("Ocurrió un error al eliminar el rango");
-      console.error(err);
+       const e = err as AxiosError<any>
+      error(e.response?.data.mensaje)
     }
   };
 

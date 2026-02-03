@@ -1,11 +1,11 @@
 import type { RouterI } from "../../../core/interface/router";
-import { CrearMedidorPage } from "../../medidor/page/CrearMedidorPage";
+import { CrearTarifaPage } from "../page/CrearTarifaPage";
 import { ListarTarifaPage } from "../page/ListarTarifaPage";
 
 export const tarifaRouter: RouterI[] = [
     {
         path: '/tarifa/crear',
-        element: CrearMedidorPage
+        element: CrearTarifaPage
     },
     {
         path: '/tarifa/listar',

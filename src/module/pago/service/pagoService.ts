@@ -1,3 +1,4 @@
+import type { AxiosResponse } from 'axios';
 import { instance } from '../../../core/config/instanceAxios';
 import type { ResultadoHttp } from '../../../core/interface/ResultadoHttp';
 import type { buscarMedidorClienteI, PagoDetalleResponse, ListarPagos } from '../interface/pago';
@@ -13,14 +14,14 @@ export async function realizarPago(
   lecturas: string[],
   cliente: string,
   medidor: string
-): Promise<any> {
+): Promise<AxiosResponse> {
   const payload = {
     cliente,
     medidor,
     lecturas: lecturas.map((item) => ({ lectura: item }))
   };
   const response = await instance.post('pago', payload);
-  return response.data;
+  return response;
 }
 
 

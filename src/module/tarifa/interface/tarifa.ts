@@ -11,7 +11,7 @@ export interface TarifaI {
   rango: RangoI[];
 }
 
-interface RangoI {
+export interface RangoI {
   rango1: number;
   rango2: number;
   costo: number;
