@@ -14,7 +14,7 @@ export async function realizarPago(
   lecturas: string[],
   cliente: string,
   medidor: string
-): Promise<AxiosResponse> {
+): Promise<{}> {
   const payload = {
     cliente,
     medidor,
