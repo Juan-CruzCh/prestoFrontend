@@ -37,8 +37,6 @@ export const ListarMedidorPage = () => {
   const listarMedidorCliente = async () => {
     try {
       const  data  = await listarMedidorClienteService(codigo, ci, nombre, apellidoPaterno, apellidoMaterno, numeroMedidor, tarifa, estado , "")
-     console.log(data);
-     
       setListarMedidorClientes(data.data);
 
     } catch (err) {

@@ -1,13 +1,8 @@
 import { useEffect, useState } from "react";
-
-import axios from "axios";
 import type { ListarMedidorClientesI } from "../interface/medidor";
 import type { ListarTarifasI } from "../../tarifa/interface/tarifa";
-import { useNavigate } from "react-router";
 import { listarTarifas } from "../../tarifa/service/tarifaService";
 import { listarMedidorClienteService } from "../service/medidorService";
-import { confirmarEliminar } from "../../../core/utils/alertasUtils";
-
 
 
 export const ListarMorososPage = () => {
@@ -24,7 +19,7 @@ export const ListarMorososPage = () => {
   const [estado, setEstado] = useState("");
   const [pagina, setPagina] = useState(1);
 
-  
+
   useEffect(() => {
     listarMedidorCliente();
     tarifasListar();
@@ -55,7 +50,7 @@ export const ListarMorososPage = () => {
     listarMedidorCliente();
   };
 
- 
+
 
   return (
     <div className="w-full h-full max-w-full mx-auto">
