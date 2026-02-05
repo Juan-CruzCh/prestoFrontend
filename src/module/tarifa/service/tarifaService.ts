@@ -26,7 +26,12 @@ export async function eliminarTarifaService(id: string): Promise<AxiosResponse> 
 }
 
 
-export async function eliminarRangoService(id: string): Promise<AxiosResponse> {
-  const response = await instance.delete<any>(`tarifa/rango/${id}`);
+
+export async function obtenerTarifasId(id: string): Promise<TarifaI> {
+  const response = await instance.get<any>(`tarifa/rangos/${id}`);
+  return response.data;
+}
+export async function editarTarifasService(data: TarifaI,id: string): Promise<AxiosResponse> {
+  const response = await instance.patch<any>(`tarifa/${id}`, data);
   return response;
 }

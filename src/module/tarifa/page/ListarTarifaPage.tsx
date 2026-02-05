@@ -2,11 +2,11 @@ import React, { useEffect, useState } from "react";
 
 import { AxiosError } from "axios";
 import { useNavigate } from "react-router";
-import { eliminarRangoService, eliminarTarifaService, listarTarifasRangos } from "../service/tarifaService";
+import {  eliminarTarifaService, listarTarifasRangos } from "../service/tarifaService";
 import { confirmarEliminar, AlertaError } from "../../../core/utils/alertasUtils";
 import { useEstadoReload } from "../../../core/utils/useEstadoReloadUtils";
 import { HttpStatus } from "../../../core/enum/httpSatatus";
-import type { ListarTarifasRangoI, TarifaRango } from "../interface/tarifa";
+import type { ListarTarifasRangoI} from "../interface/tarifa";
 
 
 
@@ -45,20 +45,7 @@ export const ListarTarifaPage: React.FC = () => {
     }
   };
 
-  const eliminarRango = async (rango: TarifaRango) => {
-    const confirmacion = await confirmarEliminar(`${rango.rango1} - ${rango.rango2}`)
-    if (!confirmacion) return
-    try {
-      const data = await eliminarRangoService(rango._id);
-      if (data.status == HttpStatus.OK) {
-        triggerReload()
-      }
-    } catch (err) {
-       const e = err as AxiosError<any>
-      AlertaError(e.response?.data.mensaje)
-    }
-  };
-
+  
   return (
     <div className="p-6 min-h-screen bg-gray-50">
       {/* Header */}
@@ -102,20 +89,7 @@ export const ListarTarifaPage: React.FC = () => {
                         <p className="text-sm">
                           <span className="font-semibold">IVA:</span> {r.iva}%
                         </p>
-                        <div className="mt-2 flex flex-col gap-1">
-                          <button
-                            onClick={() => navigate(`/tarifa/editar-rango/${r._id}`)}
-                            className="bg-green-600 hover:bg-green-700 text-white px-3 py-1 rounded-md"
-                          >
-                            Editar
-                          </button>
-                          <button
-                            onClick={() => eliminarRango(r)}
-                            className="bg-red-600 text-white px-3 py-1 rounded-md"
-                          >
-                            Eliminar
-                          </button>
-                        </div>
+                        
                       </div>
                     ))}
                   </div>

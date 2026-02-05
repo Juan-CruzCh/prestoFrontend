@@ -43,9 +43,11 @@ export const CrearTarifaPage = () => {
 
     const tarifa: TarifaI = {
       nombre: data.nombre.toUpperCase(),
-      rango: rangos
+      rango: rangos.map((item) => {
+        return { rango1: Number(item.rango1), rango2: Number(item.rango2), iva: Number(item.iva), costo: Number(item.costo) }
+      })
     };
-    
+
     try {
       const response = await crearTarifa(tarifa);
       if (response.status == HttpStatus.CREATED) {
@@ -55,7 +57,12 @@ export const CrearTarifaPage = () => {
 
     } catch (err) {
       const e = err as AxiosError<any>
-      AlertaError(e.response?.data.mensaje)
+      if (e.status == HttpStatus.BAD_REQUEST) {
+        AlertaError(e.response?.data.mensaje)
+      } else {
+        AlertaError(e.message)
+      }
+
     }
   };
 
