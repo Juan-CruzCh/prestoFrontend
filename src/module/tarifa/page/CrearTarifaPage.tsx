@@ -4,7 +4,7 @@ import type { FormularioRango, RangoI, TarifaI } from "../interface/tarifa";
 import { crearTarifa } from "../service/tarifaService";
 import { HttpStatus } from "../../../core/enum/httpSatatus";
 import { AxiosError } from "axios";
-import { error } from "../../../core/utils/alertasUtils";
+import { AlertaError } from "../../../core/utils/alertasUtils";
 
 
 export const CrearTarifaPage = () => {
@@ -55,7 +55,7 @@ export const CrearTarifaPage = () => {
 
     } catch (err) {
       const e = err as AxiosError<any>
-      error(e.response?.data.mensaje)
+      AlertaError(e.response?.data.mensaje)
     }
   };
 

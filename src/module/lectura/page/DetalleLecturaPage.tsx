@@ -4,13 +4,16 @@ import type { DetalleLecturasResponse } from "../interface/lectura";
 import { detalleLectura } from "../service/lecturaService";
 import '../style/detalleLectura.css'
 import logo from './../../../assets/logo/logo.png'
+import type { AxiosError } from "axios";
+import { HttpStatus } from "../../../core/enum/httpSatatus";
+import { AlertaError } from "../../../core/utils/alertasUtils";
 export default function DetalleLecturaPage() {
     const { medidor, lectura } = useParams();
 
     const [detalle, setDetalle] = useState<DetalleLecturasResponse>();
 
     useEffect(() => {
-        ;
+
         listarDetalleLectura()
 
     }, [medidor, lectura]);
@@ -32,8 +35,13 @@ export default function DetalleLecturaPage() {
                     totalApagar,
                 });
             }
-        } catch (error) {
-
+        } catch (err) {
+            const e = err as AxiosError<any>
+            if (e.status == HttpStatus.BAD_REQUEST) {
+                AlertaError(e.response?.data.mensaje)
+            } else {
+                AlertaError(e.message)
+            }
         }
     }
 

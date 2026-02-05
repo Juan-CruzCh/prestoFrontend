@@ -3,8 +3,10 @@ import { useNavigate } from "react-router";
 import type { buscarMedidorClienteI } from "../interface/pago";
 import { ListarCliente } from "../../cliente/components/ListarCliente";
 import type { ListarClienteI } from "../../cliente/interface/cliente";
-import { advertencia, confirmarPago, error } from "../../../core/utils/alertasUtils";
+import { advertencia, confirmarPago, AlertaError } from "../../../core/utils/alertasUtils";
 import { lecturasPendientesPago, realizarPago } from "../service/pagoService";
+import type { AxiosError } from "axios";
+import { HttpStatus } from "../../../core/enum/httpSatatus";
 
 export const RealizarPagoPage = () => {
   const navigate = useNavigate();
@@ -51,7 +53,7 @@ export const RealizarPagoPage = () => {
 
 
   useEffect(() => {
-   
+
     if (cliente) {
 
       listarLecturasPendients(cliente._id)
@@ -62,11 +64,16 @@ export const RealizarPagoPage = () => {
   const listarLecturasPendients = async (id: string) => {
     try {
       const response = await lecturasPendientesPago(id)
-    setLecturasCliente(response)
-    } catch (error) { 
-      console.log(error);
-      
-      
+      setLecturasCliente(response)
+    } catch (error) {
+      const e = error as AxiosError<any>
+      if (e.status == HttpStatus.BAD_REQUEST) {
+        AlertaError(e.response?.data.mensaje)
+      } else {
+        AlertaError(e.message)
+      }
+
+
     }
   }
 
@@ -90,26 +97,32 @@ export const RealizarPagoPage = () => {
         idMedidor
       );
       navigate(`/pago/detalle/${idPago}`);
-    } catch {
-      error("Ocurrió un error");
+    } catch (err) {
+      const e = err as AxiosError<any>
+
+      if (e.status == HttpStatus.BAD_REQUEST) {
+        AlertaError(e.response?.data.mensaje)
+      } else {
+        AlertaError(e.message)
+      }
     }
   };
 
   return (
     <div className="min-h-screen py-10 px-4">
       <h2 className="text-3xl font-bold text-center text-gray-800 mb-8">
-         Realizar Pago
+        Realizar Pago
       </h2>
 
       <div className="grid grid-cols-1 lg:grid-cols-5 gap-8">
 
         {/* CLIENTES */}
         <div className="lg:col-span-3">
-          
-            
-              <ListarCliente onClienteSeleccionado={setCliente} />
-           
-         
+
+
+          <ListarCliente onClienteSeleccionado={setCliente} />
+
+
         </div>
 
         {/* MEDIDORES */}

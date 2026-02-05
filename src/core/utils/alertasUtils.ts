@@ -23,7 +23,7 @@ import Swal from 'sweetalert2';
     });
   }
 
-  export function  error(mensaje: string) {
+  export function  AlertaError(mensaje: string) {
     return Swal.fire({
       icon: 'error',
       title: 'Error',

@@ -4,7 +4,7 @@ import type { CrearClienteI, ListarClienteI } from '../interface/cliente'
 import { crearCliente, editarCliente } from '../service/clienteService'
 import { useEstadoReload } from '../../../core/utils/useEstadoReloadUtils'
 import type { AxiosError } from 'axios'
-import { error } from '../../../core/utils/alertasUtils'
+import { AlertaError } from '../../../core/utils/alertasUtils'
 import { useEstadoModal } from '../../../core/utils/useEstadoModalUtil'
 import { HttpStatus } from '../../../core/enum/httpSatatus'
 
@@ -47,7 +47,7 @@ export const EditarClienteModal = ({ cliente }: { cliente: ListarClienteI }) => 
 
     } catch (err) {
       const e = err as AxiosError<any>
-      error(e.response?.data.mensaje)
+      AlertaError(e.response?.data.mensaje)
 
     }
   }

@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { AxiosError } from "axios";
 import { useNavigate } from "react-router";
 import { eliminarRangoService, eliminarTarifaService, listarTarifasRangos } from "../service/tarifaService";
-import { confirmarEliminar, error } from "../../../core/utils/alertasUtils";
+import { confirmarEliminar, AlertaError } from "../../../core/utils/alertasUtils";
 import { useEstadoReload } from "../../../core/utils/useEstadoReloadUtils";
 import { HttpStatus } from "../../../core/enum/httpSatatus";
 import type { ListarTarifasRangoI, TarifaRango } from "../interface/tarifa";
@@ -25,7 +25,7 @@ export const ListarTarifaPage: React.FC = () => {
       setTarifas(data);
     } catch (err) {
       const e = err as AxiosError<any>
-      error(e.response?.data.mensaje)
+      AlertaError(e.response?.data.mensaje)
 
     }
   };
@@ -41,7 +41,7 @@ export const ListarTarifaPage: React.FC = () => {
       }
     } catch (err) {
       const e = err as AxiosError<any>
-      error(e.response?.data.mensaje)
+      AlertaError(e.response?.data.mensaje)
     }
   };
 
@@ -55,7 +55,7 @@ export const ListarTarifaPage: React.FC = () => {
       }
     } catch (err) {
        const e = err as AxiosError<any>
-      error(e.response?.data.mensaje)
+      AlertaError(e.response?.data.mensaje)
     }
   };
 

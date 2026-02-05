@@ -7,7 +7,7 @@ import { listarTarifas } from "../../tarifa/service/tarifaService"
 import type { ListarTarifasI } from "../../tarifa/interface/tarifa"
 import { crearMedidor } from "../service/medidorService"
 import { HttpStatus } from "../../../core/enum/httpSatatus"
-import { exito } from "../../../core/utils/alertasUtils"
+import { advertencia, AlertaError, exito } from "../../../core/utils/alertasUtils"
 import type { AxiosError } from "axios"
 
 export const CrearMedidorPage = () => {
@@ -44,7 +44,17 @@ export const CrearMedidorPage = () => {
             setClienteError(false)
         } catch (error) {
             const e = error as AxiosError<any>
-            console.log(e.response);
+
+
+            if (e.status == HttpStatus.CONFLICT) {
+
+                advertencia(e.response?.data.mensaje)
+            } else if (e.status == HttpStatus.BAD_REQUEST) {
+                AlertaError(e.response?.data.mensaje)
+            } else {
+                AlertaError(e.message)
+            }
+
 
 
         }
@@ -66,7 +76,7 @@ export const CrearMedidorPage = () => {
         <div className="w-full p-4 bg-gray-50 min-h-screen">
             <div className="max-w-full mx-auto grid grid-cols-1 md:grid-cols-12 gap-4">
 
-          
+
                 <div className="col-span-8">
 
                     <ListarCliente onClienteSeleccionado={setCliente} />
@@ -76,7 +86,7 @@ export const CrearMedidorPage = () => {
                     <div className="bg-white rounded-lg shadow-md p-6">
                         <h2 className="text-xl font-bold mb-4">Crear Medidor</h2>
 
-           
+
                         <div className="bg-gray-50 border rounded-lg p-4 mb-6">
                             <h3 className="text-sm font-semibold mb-3">Datos del Cliente</h3>
 
@@ -112,10 +122,10 @@ export const CrearMedidorPage = () => {
                             )}
                         </div>
 
-                    
+
                         <form onSubmit={handleSubmit(onSubmit)}>
 
-                         
+
                             <div className="mb-4">
                                 <label className="block text-sm font-medium mb-1">Número de Medidor *</label>
                                 <input
@@ -131,7 +141,7 @@ export const CrearMedidorPage = () => {
                                 )}
                             </div>
 
-                      
+
                             <div className="mb-4">
                                 <label className="block text-sm font-medium mb-1">Descripción *</label>
                                 <input
@@ -146,7 +156,7 @@ export const CrearMedidorPage = () => {
                                 )}
                             </div>
 
-                           
+
                             <div className="mb-4">
                                 <label className="block text-sm font-medium mb-1">Tarifa *</label>
                                 <select
@@ -179,7 +189,7 @@ export const CrearMedidorPage = () => {
                                 )}
                             </div>
 
-                           
+
                             <div className="mb-4">
                                 <label className="block text-sm font-medium mb-1">Fecha de Instalación *</label>
                                 <input

@@ -2,6 +2,9 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 import type { ListarPagos } from "../interface/pago";
 import { listarPagos } from "../service/pagoService";
+import type { AxiosError } from "axios";
+import { AlertaError } from "../../../core/utils/alertasUtils";
+import { HttpStatus } from "../../../core/enum/httpSatatus";
 
 export const ListarPagosPage = () => {
   const navigate = useNavigate();
@@ -37,20 +40,30 @@ export const ListarPagosPage = () => {
     fi = fechaInicio,
     ff = fechaFin
   ) => {
-    const resp = await listarPagos(
-      codigo,
-      ci,
-      nombre,
-      apellidoMaterno,
-      apellidoPaterno,
-      numeroMedidor,
-      fi,
-      ff
-    );
+    try {
+      const resp = await listarPagos(
+        codigo,
+        ci,
+        nombre,
+        apellidoMaterno,
+        apellidoPaterno,
+        numeroMedidor,
+        fi,
+        ff
+      );
 
-    setPaginas(resp.paginas);
-    setPagos(resp.data);
+      setPaginas(resp.paginas);
+      setPagos(resp.data);
+    } catch (error) {
+      const e = error as AxiosError<any>
+      if (e.status == HttpStatus.BAD_REQUEST) {
+        AlertaError(e.response?.data.mensaje)
+      } else {
+        AlertaError(e.message)
+      }
+    }
   };
+
 
   const btnDesabilitarFechas = () => {
     setDisableRangoFechas(!disableRangoFechas);
@@ -201,9 +214,8 @@ export const ListarPagosPage = () => {
           <button
             key={i}
             onClick={() => onPageChange(i + 1)}
-            className={`px-3 py-1 border rounded ${
-              pagina === i + 1 ? "bg-blue-600 text-white" : ""
-            }`}
+            className={`px-3 py-1 border rounded ${pagina === i + 1 ? "bg-blue-600 text-white" : ""
+              }`}
           >
             {i + 1}
           </button>

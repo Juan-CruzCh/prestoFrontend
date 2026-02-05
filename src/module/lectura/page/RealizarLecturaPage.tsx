@@ -3,6 +3,9 @@ import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router";
 import type { BuscarMedidorClienteI, FormularioLecturaI } from "../interface/lectura";
 import { buscarMedidorCliente, registrarLectura } from "../service/lecturaService";
+import type { AxiosError } from "axios";
+import { HttpStatus } from "../../../core/enum/httpSatatus";
+import { advertencia, AlertaError } from "../../../core/utils/alertasUtils";
 
 
 
@@ -56,8 +59,17 @@ export const RealizarLecturaPage = () => {
                 setLecturaCliente(response);
                 setValue("lecturaAnterior", response.lecturaActual || 0);
             }
-        } catch (err: any) {
-            setError(err?.response?.data?.error || "Error al buscar medidor");
+        } catch (err) {
+            const e = err as AxiosError<any>
+
+            if (e.status == HttpStatus.NOT_FOUND) {
+                setError(e.response?.data.mensaje);
+            } else if (e.status == HttpStatus.BAD_REQUEST) {
+                AlertaError(e.response?.data.mensaje)
+            } else {
+                AlertaError(e.message)
+            }
+
         }
     };
 
@@ -78,8 +90,16 @@ export const RealizarLecturaPage = () => {
                 if (response) {
                     navigate(`/lectura/detalle/${response.medidor}/${response.lectura}`);
                 }
-            } catch (err: any) {
-                alert(err?.response?.data?.mensaje || "Error al registrar");
+            } catch (err) {
+                const e = err as AxiosError<any>
+
+                if (e.status == HttpStatus.CONFLICT) {
+                    advertencia(e.response?.data.mensaje);
+                } else if (e.status == HttpStatus.BAD_REQUEST) {
+                    AlertaError(e.response?.data.mensaje)
+                } else {
+                    AlertaError(e.message)
+                }
             }
         }
     };

@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { listarClientes as listarClientesService, eliminarCliente as eliminarClienteService } from '../service/clienteService';
 import type { ListarClienteI } from '../interface/cliente';
 
-import { confirmarEliminar, error } from '../../../core/utils/alertasUtils';
+import { confirmarEliminar, AlertaError } from '../../../core/utils/alertasUtils';
 import { CrearClienteModal } from './CrearClienteModal';
 import { useEstadoReload } from '../../../core/utils/useEstadoReloadUtils';
 import { EditarClienteModal } from './EditarClienteModal';
@@ -60,7 +60,7 @@ export function ListarCliente({ onClienteSeleccionado }: { onClienteSeleccionado
       }
     } catch (err) {
       const e = err as AxiosError<any>
-      error(e.response?.data.mensaje)
+      AlertaError(e.response?.data.mensaje)
     }
   };
 

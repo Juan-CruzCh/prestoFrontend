@@ -1,7 +1,8 @@
 import { useForm, } from "react-hook-form";
 import { login } from "../service/autenticacionService";
 import type { AxiosError } from "axios";
-import { useNavigate } from "react-router";
+import { useState } from "react";
+import { HttpStatus } from "../../../core/enum/httpSatatus";
 
 interface LoginFormInputs {
   usuario: string;
@@ -9,33 +10,35 @@ interface LoginFormInputs {
 }
 
 export const LoginPage = () => {
+  const [error, setError] = useState<string>('')
   const {
     register,
     handleSubmit,
     formState: { errors }
   } = useForm<LoginFormInputs>();
- const navidate =  useNavigate()
+
 
   const onSubmit = async (data: LoginFormInputs) => {
     try {
+
       const response = await login(data.usuario, data.password)
-      console.log(response);
-      
       if (response.token) {
-        navidate('/dashboard')
+        window.location.href = '/dashboard'
       }
     } catch (error) {
       const e = error as AxiosError<any>
-      console.log(e.status);
-
-      console.log('e', e.response?.data.mensaje);
+      if (e.status == HttpStatus.UNAUTHORIZED) {
+        setError(e.response?.data.mensaje)
+      } else {
+        setError(e.message)
+      }
 
     }
   };
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-100">
-      <div className="bg-white p-8 rounded-xl shadow-md w-full max-w-sm border">
+      <div className="bg-white p-8 rounded-xl shadow-md w-full max-w-sm ">
         <h2 className="text-2xl font-semibold text-center text-blue-700 mb-6">
           Sistema de Agua - Acceso
         </h2>
@@ -66,6 +69,9 @@ export const LoginPage = () => {
             />
             {errors.password && (
               <p className="text-red-500 text-sm mt-1">{errors.password.message}</p>
+            )}
+            {error && (
+              <p className="text-red-500 text-sm mt-1">{error}</p>
             )}
           </div>
 

@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import type { UsuarioListarI } from "../interface/usuario";
 import { eliminarUsuario, listarUsuarios } from "../service/usuarioService";
 import type { AxiosError } from "axios";
-import { confirmarEliminar, error } from "../../../core/utils/alertasUtils";
+import { confirmarEliminar, AlertaError } from "../../../core/utils/alertasUtils";
 import { useEstadoReload } from "../../../core/utils/useEstadoReloadUtils";
 import { HttpStatus } from "../../../core/enum/httpSatatus";
 import { CrearUsuarioModal } from "../components/CrearUsuarioModal";
@@ -26,7 +26,7 @@ export function ListarUsuarioPage() {
             setUsuarios(data);
         } catch (err) {
             const e = err as AxiosError<any>
-            error(e.response?.data.mensaje)
+            AlertaError(e.response?.data.mensaje)
         }
     };
 
@@ -41,7 +41,7 @@ export function ListarUsuarioPage() {
             }
         } catch (err) {
             const e = err as AxiosError<any>
-            error(e.response?.data.mensaje)
+            AlertaError(e.response?.data.mensaje)
         }
     };
 

@@ -2,8 +2,9 @@ import { useEffect, useState } from "react";
 import type { ListarLecturaMedidorI } from "../interface/lectura";
 import { useNavigate } from "react-router";
 import { eliminarLecturaService, listarLecturasService } from "../service/lecturaService";
-import { confirmarEliminar } from "../../../core/utils/alertasUtils";
+import { AlertaError, confirmarEliminar } from "../../../core/utils/alertasUtils";
 import type { AxiosError } from "axios";
+import { HttpStatus } from "../../../core/enum/httpSatatus";
 
 
 
@@ -31,15 +32,17 @@ export const ListarLecturasPage = () => {
     const listarLecturasRegistradas = async (inicio = fechaInicio, fin = fechaFin) => {
         try {
             const data = await listarLecturasService(inicio, fin);
-      
-          
+
+
             setListarLecturas(data);
             setTotalPaginas(Math.ceil(data.length / 20));
         } catch (err) {
             const e = err as AxiosError<any>
-            console.log(e.response);
-            
-            console.error("Error al listar lecturas", err);
+            if (e.status == HttpStatus.BAD_REQUEST) {
+                AlertaError(e.response?.data.mensaje)
+            } else {
+                AlertaError(e.message)
+            }
         }
     };
 
@@ -54,8 +57,13 @@ export const ListarLecturasPage = () => {
         try {
             await eliminarLecturaService(lectura._id);
 
-        } catch (err: any) {
-            alert(err.response?.data?.mensaje || "Ocurrió un error al eliminar");
+        } catch (err) {
+           const e = err as AxiosError<any>
+            if (e.status == HttpStatus.BAD_REQUEST) {
+                AlertaError(e.response?.data.mensaje)
+            } else {
+                AlertaError(e.message)
+            }
         }
     };
 

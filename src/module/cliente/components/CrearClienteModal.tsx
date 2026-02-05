@@ -4,7 +4,7 @@ import type { CrearClienteI, ListarClienteI } from '../interface/cliente'
 import { crearCliente } from '../service/clienteService'
 import { useEstadoReload } from '../../../core/utils/useEstadoReloadUtils'
 import type { AxiosError } from 'axios'
-import { error } from '../../../core/utils/alertasUtils'
+import { AlertaError } from '../../../core/utils/alertasUtils'
 
 export const CrearClienteModal = ({ setCliente
 }: { setCliente: (cliente: ListarClienteI) => void }) => {
@@ -42,7 +42,7 @@ export const CrearClienteModal = ({ setCliente
             cerrarModal()
         } catch (err) {
             const e = err as AxiosError<any>
-            error(e.response?.data.mensaje)
+            AlertaError(e.response?.data.mensaje)
 
         }
     }
