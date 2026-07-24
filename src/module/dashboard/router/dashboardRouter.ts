@@ -4,6 +4,6 @@ import { DashboardPage } from "../page/DashboardPage";
 export const dashboardRouter: RouterI[] = [
     {
         element:DashboardPage,
-        path:'/dashboard'
+        path:'/inicio'
     }
 ];

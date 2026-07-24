@@ -104,127 +104,146 @@ export const RealizarLecturaPage = () => {
         }
     };
 
-    return (
-        <div className="min-h-screen flex justify-center items-center bg-gray-50 px-4 py-6">
-            <div className="w-full max-w-3xl bg-white p-6 sm:p-8 rounded-lg shadow-md space-y-5">
+    const inputClass =
+        "w-full rounded-lg border border-slate-200 bg-white px-3 py-2.5 text-sm text-slate-700 outline-none transition focus:border-blue-400 focus:ring-2 focus:ring-blue-100";
+    const labelClass = "mb-1.5 block text-sm font-medium text-slate-700";
 
-                <h2 className="text-xl sm:text-2xl font-semibold text-center text-gray-800">
-                    Crear Lectura
+    return (
+        <div className="mx-auto max-w-3xl">
+            <div className="mb-5">
+                <h2 className="text-xl font-semibold text-slate-800">
+                    Crear lectura
                 </h2>
+                <p className="mt-1 text-sm text-slate-500">
+                    Busca el medidor e ingresa la lectura del período
+                </p>
+            </div>
+
+            <div className="rounded-xl border border-slate-200 bg-white p-5 shadow-sm md:p-6 space-y-5">
 
                 {/* Número de medidor */}
                 <div>
-                    <label className="block mb-2 font-medium text-gray-700">
-                        Número de Medidor
+                    <label className={labelClass}>
+                        Número de medidor
                     </label>
 
-                    <div className="flex gap-2">
+                    <div className="flex flex-col gap-2 sm:flex-row">
                         <input
                             value={numeroMedidor}
                             onChange={(e) => setNumeroMedidor(e.target.value)}
                             type="text"
                             placeholder="Ingrese número de medidor"
-                            className="w-full p-3 border rounded-lg focus:ring-2 focus:ring-blue-500"
+                            className={inputClass}
                         />
 
                         <button
                             type="button"
                             onClick={buscarMedidor}
-                            className="bg-blue-600 text-white px-4 rounded-lg hover:bg-blue-700"
+                            className="shrink-0 rounded-lg bg-blue-600 px-5 py-2.5 text-sm font-medium text-white transition-colors hover:bg-blue-700"
                         >
                             Buscar
                         </button>
                     </div>
 
-                    {error && <small className="text-red-500">{error}</small>}
+                    {error && <p className="mt-1.5 text-xs text-rose-500">{error}</p>}
                 </div>
 
                 {/* Información del cliente */}
                 {lecturaCliente && (
-                    <div className="p-4 bg-gray-50 rounded-lg border space-y-2">
-                        <p>
-                            <strong>Nombre:</strong>{" "}
-                            <span className="text-gray-600">{lecturaCliente.nombre}</span>
+                    <div className="rounded-lg border border-slate-200 bg-slate-50 p-4">
+                        <p className="mb-3 text-xs font-semibold uppercase tracking-wide text-slate-500">
+                            Datos del cliente
                         </p>
-                        <p>
-                            <strong>N° Medidor:</strong>{" "}
-                            <span className="text-gray-600">{lecturaCliente.numeroMedidor}</span>
-                        </p>
-                        <p>
-                            <strong>Estado:</strong>{" "}
-                            <span className="ml-2 px-2 py-1 bg-red-100 text-red-700 rounded text-sm">
-                                {lecturaCliente.estado}
-                            </span>
-                        </p>
+                        <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
+                            <div>
+                                <p className="text-xs text-slate-400">Nombre</p>
+                                <p className="mt-0.5 text-sm font-medium text-slate-800">
+                                    {lecturaCliente.nombre}
+                                </p>
+                            </div>
+                            <div>
+                                <p className="text-xs text-slate-400">N° medidor</p>
+                                <p className="mt-0.5 text-sm font-medium text-slate-800">
+                                    {lecturaCliente.numeroMedidor}
+                                </p>
+                            </div>
+                            <div>
+                                <p className="text-xs text-slate-400">Estado</p>
+                                <span className="mt-0.5 inline-flex rounded-md bg-rose-50 px-2 py-0.5 text-xs font-medium text-rose-700">
+                                    {lecturaCliente.estado}
+                                </span>
+                            </div>
+                        </div>
                     </div>
                 )}
 
-                {/* Año */}
-                <div>
-                    <label className="block mb-2 font-medium text-gray-700">Año</label>
-                    <select
-                        value={gestion}
-                        onChange={(e) => setGestion(e.target.value)}
-                        className="w-full p-3 border rounded-lg"
-                    >
-                        {gestiones.map((g) => (
-                            <option key={g} value={g}>{g}</option>
-                        ))}
-                    </select>
+                <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+                    {/* Año */}
+                    <div>
+                        <label className={labelClass}>Año</label>
+                        <select
+                            value={gestion}
+                            onChange={(e) => setGestion(e.target.value)}
+                            className={inputClass}
+                        >
+                            {gestiones.map((g) => (
+                                <option key={g} value={g}>{g}</option>
+                            ))}
+                        </select>
+                    </div>
+
+                    <div>
+                        <label className={labelClass}>Mes</label>
+                        <select
+                            value={mes}
+                            onChange={(e) => setMes(e.target.value)}
+                            className={inputClass}
+                        >
+                            <option value="">-- Seleccione un mes --</option>
+                            {mesesAno.map((m) => (
+                                <option key={m} value={m}>{m}</option>
+                            ))}
+                        </select>
+                    </div>
                 </div>
 
 
-                <div>
-                    <label className="block mb-2 font-medium text-gray-700">Mes</label>
-                    <select
-                        value={mes}
-                        onChange={(e) => setMes(e.target.value)}
-                        className="w-full p-3 border rounded-lg"
-                    >
-                        <option value="">-- Seleccione un mes --</option>
-                        {mesesAno.map((m) => (
-                            <option key={m} value={m}>{m}</option>
-                        ))}
-                    </select>
-                </div>
-
-
-                <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
+                <form onSubmit={handleSubmit(onSubmit)} className="space-y-5 border-t border-slate-100 pt-5">
 
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div>
-                            <label className="block mb-2 font-medium text-gray-700">
-                                Lectura Anterior
+                            <label className={labelClass}>
+                                Lectura anterior
                             </label>
                             <input
                                 type="number"
                                 disabled
                                 {...register("lecturaAnterior", { required: true, min: 0 })}
-                                className="w-full p-3 border rounded-lg bg-gray-100 text-right"
+                                className={`${inputClass} bg-slate-100 text-right text-slate-500`}
                             />
                         </div>
 
                         <div>
-                            <label className="block mb-2 font-medium text-gray-700">
-                                Lectura Actual
+                            <label className={labelClass}>
+                                Lectura actual
                             </label>
                             <input
                                 type="number"
                                 {...register("lecturaActual", { required: true, min: 0 })}
-                                className="w-full p-3 border rounded-lg"
+                                className={`${inputClass} text-right`}
                             />
                             {errors.lecturaActual && (
-                                <small className="text-red-500">
+                                <p className="mt-1.5 text-xs text-rose-500">
                                     La lectura es obligatoria
-                                </small>
+                                </p>
                             )}
                         </div>
                     </div>
 
-                    <div className="flex justify-center">
+                    <div className="flex justify-end">
                         <button
                             type="submit"
-                            className="w-full sm:w-auto bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700"
+                            className="w-full rounded-lg bg-blue-600 px-6 py-2.5 text-sm font-medium text-white transition-colors hover:bg-blue-700 sm:w-auto"
                         >
                             Guardar
                         </button>
