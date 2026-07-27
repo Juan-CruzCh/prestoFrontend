@@ -67,7 +67,7 @@ export const ListarCajaPage = () => {
                   Apertura
                 </th>
                 <th className="px-3 py-2.5 text-left text-xs font-semibold uppercase tracking-wide text-slate-500">
-                  Abrió
+                  Responsable
                 </th>
                 <th className="px-3 py-2.5 text-left text-xs font-semibold uppercase tracking-wide text-slate-500">
                   Monto ini.
@@ -83,9 +83,6 @@ export const ListarCajaPage = () => {
                 </th>
                 <th className="px-3 py-2.5 text-left text-xs font-semibold uppercase tracking-wide text-slate-500">
                   Cierre
-                </th>
-                <th className="px-3 py-2.5 text-left text-xs font-semibold uppercase tracking-wide text-slate-500">
-                  Cerró
                 </th>
                 <th className="px-3 py-2.5 text-left text-xs font-semibold uppercase tracking-wide text-slate-500">
                   Acc.
@@ -108,7 +105,6 @@ export const ListarCajaPage = () => {
                 <td className="px-3 py-2.5 text-slate-600">Bs 2,850.00</td>
                 <td className="px-3 py-2.5 font-medium text-slate-800">Bs 2,350.00</td>
                 <td className="px-3 py-2.5 text-slate-600">18</td>
-                <td className="px-3 py-2.5 text-slate-400">—</td>
                 <td className="px-3 py-2.5 text-slate-400">—</td>
                 <td className="px-3 py-2.5">
                   <button
@@ -137,7 +133,6 @@ export const ListarCajaPage = () => {
                 <td className="px-3 py-2.5 font-medium text-slate-800">Bs 320.00</td>
                 <td className="px-3 py-2.5 text-slate-600">5</td>
                 <td className="px-3 py-2.5 text-slate-400">—</td>
-                <td className="px-3 py-2.5 text-slate-400">—</td>
                 <td className="px-3 py-2.5">
                   <button
                     type="button"
@@ -165,7 +160,6 @@ export const ListarCajaPage = () => {
                 <td className="px-3 py-2.5 font-medium text-slate-800">Bs 2,620.00</td>
                 <td className="px-3 py-2.5 text-slate-600">22</td>
                 <td className="px-3 py-2.5 text-slate-600">23/07/2026 18:40</td>
-                <td className="px-3 py-2.5 text-slate-700">Juan Pérez</td>
                 <td className="px-3 py-2.5">
                   <button
                     type="button"
