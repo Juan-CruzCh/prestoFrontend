@@ -1,3 +1,5 @@
+import { useEstadoModal } from "../../../core/utils/useEstadoModalUtil";
+
 type Props = {
   nombre: string;
   abierta: boolean;
@@ -15,6 +17,10 @@ export const Caja = ({
   montoTotal,
   cantidadPagos,
 }: Props) => {
+  const { openModal } = useEstadoModal();
+
+  const btnCerrarCaja = async () => {};
+
   return (
     <div className="flex items-center gap-2.5 rounded-lg border border-white/15 bg-white/10 px-2.5 py-1.5 text-white backdrop-blur-sm">
       <div className="min-w-0 leading-tight">
@@ -38,7 +44,10 @@ export const Caja = ({
 
         <div className="mt-0.5 flex items-center gap-2 text-[10px] text-white/70">
           <span>
-            Inicial <span className="font-medium text-white">Bs {montoInicial.toFixed(0)}</span>
+            Inicial{" "}
+            <span className="font-medium text-white">
+              Bs {montoInicial.toFixed(0)}
+            </span>
           </span>
           <span className="text-white/30">·</span>
           <span>
@@ -46,16 +55,30 @@ export const Caja = ({
           </span>
           <span className="text-white/30">·</span>
           <span>
-            Actual <span className="font-medium text-white">Bs {montoActual.toFixed(0)}</span>
+            Actual{" "}
+            <span className="font-medium text-white">
+              Bs {montoActual.toFixed(0)}
+            </span>
           </span>
           <span className="text-white/30">·</span>
           <span>
-            Total <span className="font-semibold text-white">Bs {montoTotal.toFixed(0)}</span>
+            Total{" "}
+            <span className="font-semibold text-white">
+              Bs {montoTotal.toFixed(0)}
+            </span>
           </span>
         </div>
       </div>
 
       <button
+        type="button"
+        onClick={() => {
+          if (abierta) {
+            btnCerrarCaja();
+          } else {
+            openModal();
+          }
+        }}
         className={`shrink-0 rounded-md px-2 py-1 text-[10px] font-semibold transition-colors ${
           abierta
             ? "bg-white text-rose-600 hover:bg-rose-50"
