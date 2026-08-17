@@ -35,9 +35,7 @@ export const AbrirCajaModal = () => {
 
       }
     } catch (err) {
-      const e = err as AxiosError<any>;
-      console.log('err',e);
-      
+      const e = err as AxiosError<any>;      
       AlertaError(e.response?.data.mensaje ?? "No se pudo abrir la caja");
     }
   };

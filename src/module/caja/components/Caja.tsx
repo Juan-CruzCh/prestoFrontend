@@ -18,9 +18,7 @@ export const Caja = ({
   cantidadPagos,
 }: Props) => {
   const { openModal } = useEstadoModal();
-
   const btnCerrarCaja = async () => {};
-
   return (
     <div className="flex items-center gap-2.5 rounded-lg border border-white/15 bg-white/10 px-2.5 py-1.5 text-white backdrop-blur-sm">
       <div className="min-w-0 leading-tight">

@@ -11,11 +11,10 @@ export interface cajaUsuarioI {
     fechaFin: string;
     fecha: string;
     flag: string;
-    CantidadPagos:number
+    CantidadPagos: number
 
 }
 
-export interface AbrirCajaFormI   {
+export interface AbrirCajaFormI {
     montoInicial: number;
-  };
-  
+};
