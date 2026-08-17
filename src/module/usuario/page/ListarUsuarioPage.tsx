@@ -51,57 +51,61 @@ export function ListarUsuarioPage() {
     }
 
     return (
-        <div className="mb-6">
-            <h3 className="text-lg font-medium mb-3 text-gray-700">Usuarios</h3>
+        <div className="w-full">
+            <h3 className="mb-3 text-lg font-medium text-gray-700">Usuarios</h3>
 
             <CrearUsuarioModal />
 
-            <div className="overflow-x-auto  rounded-lg">
-                <table className="min-w-full divide-y divide-gray-200">
-                    <thead className="bg-gray-100">
-                        <tr>
-                            <th className="px-4 py-2 text-left text-sm font-medium text-gray-700">CI</th>
-                            <th className="px-4 py-2 text-left text-sm font-medium text-gray-700">Nombre</th>
-                            <th className="px-4 py-2 text-left text-sm font-medium text-gray-700">Apellido Paterno</th>
-                            <th className="px-4 py-2 text-left text-sm font-medium text-gray-700">Apellido Materno</th>
-                            <th className="px-4 py-2 text-left text-sm font-medium text-gray-700">Usuario</th>
-                            <th className="px-4 py-2 text-left text-sm font-medium text-gray-700">Rol</th>
-                            <th className="px-4 py-2 text-left text-sm font-medium text-gray-700">Direccion</th>
-                            <th className="px-4 py-2 text-left text-sm font-medium text-gray-700">Celular</th>
-                            <th className="px-4 py-2 text-left text-sm font-medium text-gray-700">Acción</th>
-                        </tr>
-                    </thead>
-
-                    <tbody className="divide-y divide-gray-200 bg-white">
-                        {usuarios.map((item, index) => (
-                            <tr key={item._id ?? index}>
-                                <td className="px-4 py-2">{item.ci}</td>
-                                <td className="px-4 py-2">{item.nombre}</td>
-                                <td className="px-4 py-2">{item.apellidoPaterno}</td>
-                                <td className="px-4 py-2">{item.apellidoMaterno}</td>
-                                <td className="px-4 py-2">{item.usuario}</td>
-                                <td className="px-4 py-2">{item.rol}</td>
-                                <td className="px-4 py-2">{item.direccion}</td>
-                                <td className="px-4 py-2">{item.celular}</td>
-                                <td className="px-4 py-2 flex gap-2">
-                                    <button
-                                        onClick={() => btnEliminar(item)}
-                                        className="bg-red-600 hover:bg-red-700 text-white px-3 py-1 rounded"
-                                    >
-                                        Eliminar
-                                    </button>
-
-                                    <button
-                                        onClick={() => btnEditar(item)}
-                                        className="bg-blue-600 hover:bg-blue-700 text-white px-3 py-1 rounded"
-                                    >
-                                        Editar
-                                    </button>
-                                </td>
+            <div className="overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm">
+                <div className="overflow-x-auto">
+                    <table className="w-full min-w-[900px] text-sm">
+                        <thead>
+                            <tr className="border-b border-slate-200 bg-slate-50">
+                                <th className="whitespace-nowrap px-3 py-2.5 text-left text-xs font-semibold uppercase tracking-wide text-slate-500">CI</th>
+                                <th className="whitespace-nowrap px-3 py-2.5 text-left text-xs font-semibold uppercase tracking-wide text-slate-500">Nombre</th>
+                                <th className="whitespace-nowrap px-3 py-2.5 text-left text-xs font-semibold uppercase tracking-wide text-slate-500">Apellido Paterno</th>
+                                <th className="whitespace-nowrap px-3 py-2.5 text-left text-xs font-semibold uppercase tracking-wide text-slate-500">Apellido Materno</th>
+                                <th className="whitespace-nowrap px-3 py-2.5 text-left text-xs font-semibold uppercase tracking-wide text-slate-500">Usuario</th>
+                                <th className="whitespace-nowrap px-3 py-2.5 text-left text-xs font-semibold uppercase tracking-wide text-slate-500">Rol</th>
+                                <th className="whitespace-nowrap px-3 py-2.5 text-left text-xs font-semibold uppercase tracking-wide text-slate-500">Direccion</th>
+                                <th className="whitespace-nowrap px-3 py-2.5 text-left text-xs font-semibold uppercase tracking-wide text-slate-500">Celular</th>
+                                <th className="whitespace-nowrap px-3 py-2.5 text-left text-xs font-semibold uppercase tracking-wide text-slate-500">Acción</th>
                             </tr>
-                        ))}
-                    </tbody>
-                </table>
+                        </thead>
+
+                        <tbody className="divide-y divide-slate-100 bg-white">
+                            {usuarios.map((item, index) => (
+                                <tr key={item._id ?? index} className="hover:bg-blue-50/50">
+                                    <td className="whitespace-nowrap px-3 py-2.5">{item.ci}</td>
+                                    <td className="whitespace-nowrap px-3 py-2.5">{item.nombre}</td>
+                                    <td className="whitespace-nowrap px-3 py-2.5">{item.apellidoPaterno}</td>
+                                    <td className="whitespace-nowrap px-3 py-2.5">{item.apellidoMaterno}</td>
+                                    <td className="whitespace-nowrap px-3 py-2.5">{item.usuario}</td>
+                                    <td className="whitespace-nowrap px-3 py-2.5">{item.rol}</td>
+                                    <td className="whitespace-nowrap px-3 py-2.5">{item.direccion}</td>
+                                    <td className="whitespace-nowrap px-3 py-2.5">{item.celular}</td>
+                                    <td className="whitespace-nowrap px-3 py-2.5">
+                                        <div className="inline-flex flex-nowrap gap-2">
+                                            <button
+                                                onClick={() => btnEliminar(item)}
+                                                className="rounded bg-red-600 px-3 py-1 text-white hover:bg-red-700"
+                                            >
+                                                Eliminar
+                                            </button>
+
+                                            <button
+                                                onClick={() => btnEditar(item)}
+                                                className="rounded bg-blue-600 px-3 py-1 text-white hover:bg-blue-700"
+                                            >
+                                                Editar
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
+                </div>
             </div>
 
             {

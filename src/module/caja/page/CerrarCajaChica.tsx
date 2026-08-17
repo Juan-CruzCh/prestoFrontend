@@ -9,7 +9,7 @@ export const CerrarCajaChica = () => {
             Movimientos (gastos)
           </p>
           <div className="max-h-[calc(100vh-12rem)] overflow-auto">
-            <table className="min-w-full text-sm">
+            <table className="w-full min-w-[640px] text-sm">
               <thead className="sticky top-0 bg-slate-50">
                 <tr className="border-b border-slate-200 text-left text-xs text-slate-500">
                   <th className="px-3 py-2 font-medium">Cód.</th>

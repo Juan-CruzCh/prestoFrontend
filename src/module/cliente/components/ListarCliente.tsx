@@ -71,100 +71,87 @@ export function ListarCliente({ onClienteSeleccionado }: { onClienteSeleccionado
   };
 
   const inputFiltro =
-    "w-full rounded-md border border-slate-200 bg-white px-2 py-1.5 text-xs font-normal text-slate-700 placeholder:text-slate-400 outline-none transition focus:border-blue-400 focus:ring-2 focus:ring-blue-100";
+    "w-full min-w-0 rounded-md border border-slate-200 bg-white px-2 py-1.5 text-xs font-normal text-slate-700 placeholder:text-slate-400 outline-none transition focus:border-blue-400 focus:ring-2 focus:ring-blue-100";
 
   return (
     <div className="mb-6">
-      <div className="mb-3 flex items-center justify-between gap-3">
+      <div className="mb-3 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
         <h3 className="text-base font-semibold text-slate-800">Clientes</h3>
         <CrearClienteModal setCliente={onClienteSeleccionado} />
       </div>
 
+      <div className="mb-3 grid grid-cols-1 gap-2 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-6">
+        <input
+          type="text"
+          placeholder="Buscar cód."
+          value={codigo}
+          onChange={(e) => setCodigo(e.target.value)}
+          className={inputFiltro}
+        />
+        <input
+          type="text"
+          placeholder="Buscar CI"
+          value={ci}
+          onChange={(e) => setCi(e.target.value)}
+          className={inputFiltro}
+        />
+        <input
+          type="text"
+          placeholder="Buscar nom."
+          value={nombre}
+          onChange={(e) => setNombre(e.target.value)}
+          className={inputFiltro}
+        />
+        <input
+          type="text"
+          placeholder="Buscar ap. pat."
+          value={apellidoPaterno}
+          onChange={(e) => setApellidoPaterno(e.target.value)}
+          className={inputFiltro}
+        />
+        <input
+          type="text"
+          placeholder="Buscar ap. mat."
+          value={apellidoMaterno}
+          onChange={(e) => setApellidoMaterno(e.target.value)}
+          className={inputFiltro}
+        />
+        <input
+          type="text"
+          placeholder="Buscar cel."
+          value={celular}
+          onChange={(e) => setCelular(e.target.value)}
+          className={inputFiltro}
+        />
+      </div>
+
       <div className="overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm">
         <div className="overflow-x-auto">
-          <table className="min-w-full text-sm">
+          <table className="w-full min-w-[800px] text-sm">
             <thead>
-              <tr className="border-b border-slate-100 bg-slate-50/80">
-                <th className="px-3 py-2" />
-                <th className="px-3 py-2">
-                  <input
-                    type="text"
-                    placeholder="Buscar cód."
-                    value={codigo}
-                    onChange={(e) => setCodigo(e.target.value)}
-                    className={inputFiltro}
-                  />
-                </th>
-                <th className="px-3 py-2">
-                  <input
-                    type="text"
-                    placeholder="Buscar CI"
-                    value={ci}
-                    onChange={(e) => setCi(e.target.value)}
-                    className={inputFiltro}
-                  />
-                </th>
-                <th className="px-3 py-2">
-                  <input
-                    type="text"
-                    placeholder="Buscar nom."
-                    value={nombre}
-                    onChange={(e) => setNombre(e.target.value)}
-                    className={inputFiltro}
-                  />
-                </th>
-                <th className="px-3 py-2">
-                  <input
-                    type="text"
-                    placeholder="Buscar ap. pat."
-                    value={apellidoPaterno}
-                    onChange={(e) => setApellidoPaterno(e.target.value)}
-                    className={inputFiltro}
-                  />
-                </th>
-                <th className="px-3 py-2">
-                  <input
-                    type="text"
-                    placeholder="Buscar ap. mat."
-                    value={apellidoMaterno}
-                    onChange={(e) => setApellidoMaterno(e.target.value)}
-                    className={inputFiltro}
-                  />
-                </th>
-                <th className="px-3 py-2">
-                  <input
-                    type="text"
-                    placeholder="Buscar cel."
-                    value={celular}
-                    onChange={(e) => setCelular(e.target.value)}
-                    className={inputFiltro}
-                  />
-                </th>
-                <th className="px-3 py-2" />
-              </tr>
               <tr className="border-b border-slate-200 bg-slate-50">
-                <th className="px-3 py-2.5 text-left text-xs font-semibold uppercase tracking-wide text-slate-500">
+                <th className="whitespace-nowrap px-3 py-2.5 text-left text-xs font-semibold uppercase tracking-wide text-slate-500">
                   Sel.
                 </th>
-                <th className="px-3 py-2.5 text-left text-xs font-semibold uppercase tracking-wide text-slate-500">
+                <th className="whitespace-nowrap px-3 py-2.5 text-left text-xs font-semibold uppercase tracking-wide text-slate-500">
                   Cód.
                 </th>
-                <th className="px-3 py-2.5 text-left text-xs font-semibold uppercase tracking-wide text-slate-500">
+                <th className="whitespace-nowrap px-3 py-2.5 text-left text-xs font-semibold uppercase tracking-wide text-slate-500">
                   CI
                 </th>
-                <th className="px-3 py-2.5 text-left text-xs font-semibold uppercase tracking-wide text-slate-500">
+                <th className="whitespace-nowrap px-3 py-2.5 text-left text-xs font-semibold uppercase tracking-wide text-slate-500">
                   Nom.
                 </th>
-                <th className="px-3 py-2.5 text-left text-xs font-semibold uppercase tracking-wide text-slate-500">
+                <th className="whitespace-nowrap px-3 py-2.5 text-left text-xs font-semibold uppercase tracking-wide text-slate-500">
                   Ap. Pat.
                 </th>
-                <th className="px-3 py-2.5 text-left text-xs font-semibold uppercase tracking-wide text-slate-500">
+                <th className="whitespace-nowrap px-3 py-2.5 text-left text-xs font-semibold uppercase tracking-wide text-slate-500">
                   Ap. Mat.
                 </th>
-                <th className="px-3 py-2.5 text-left text-xs font-semibold uppercase tracking-wide text-slate-500">
+                <th className="whitespace-nowrap px-3 py-2.5 text-left text-xs font-semibold uppercase tracking-wide text-slate-500">
                   Cel.
                 </th>
-                <th className="px-3 py-2.5 text-left text-xs font-semibold uppercase tracking-wide text-slate-500">
+                <th className="whitespace-nowrap px-3 py-2.5 text-left text-xs font-semibold uppercase tracking-wide text-slate-500">
                   Acc.
                 </th>
               </tr>
@@ -175,7 +162,7 @@ export function ListarCliente({ onClienteSeleccionado }: { onClienteSeleccionado
                   key={item._id}
                   className="transition-colors hover:bg-blue-50/50"
                 >
-                  <td className="px-3 py-2.5">
+                  <td className="whitespace-nowrap px-3 py-2.5">
                     <input
                       type="radio"
                       onClick={() => onClienteSeleccionado(item)}
@@ -183,14 +170,14 @@ export function ListarCliente({ onClienteSeleccionado }: { onClienteSeleccionado
                       className="h-4 w-4 cursor-pointer accent-blue-600"
                     />
                   </td>
-                  <td className="px-3 py-2.5 font-medium text-slate-800">{item.codigo}</td>
-                  <td className="px-3 py-2.5 text-slate-600">{item.ci}</td>
-                  <td className="px-3 py-2.5 text-slate-700">{item.nombre}</td>
-                  <td className="px-3 py-2.5 text-slate-600">{item.apellidoPaterno}</td>
-                  <td className="px-3 py-2.5 text-slate-600">{item.apellidoMaterno}</td>
-                  <td className="px-3 py-2.5 text-slate-600">{item.celular}</td>
-                  <td className="px-3 py-2.5">
-                    <div className="flex items-center gap-1.5 whitespace-nowrap">
+                  <td className="whitespace-nowrap px-3 py-2.5 font-medium text-slate-800">{item.codigo}</td>
+                  <td className="whitespace-nowrap px-3 py-2.5 text-slate-600">{item.ci}</td>
+                  <td className="whitespace-nowrap px-3 py-2.5 text-slate-700">{item.nombre}</td>
+                  <td className="whitespace-nowrap px-3 py-2.5 text-slate-600">{item.apellidoPaterno}</td>
+                  <td className="whitespace-nowrap px-3 py-2.5 text-slate-600">{item.apellidoMaterno}</td>
+                  <td className="whitespace-nowrap px-3 py-2.5 text-slate-600">{item.celular}</td>
+                  <td className="whitespace-nowrap px-3 py-2.5">
+                    <div className="inline-flex items-center gap-1.5">
                       <button
                         type="button"
                         title="Eliminar"

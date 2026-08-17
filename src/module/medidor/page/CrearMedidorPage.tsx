@@ -73,16 +73,16 @@ export const CrearMedidorPage = () => {
     }
 
     return (
-        <div className="w-full p-4 bg-gray-50 min-h-screen">
-            <div className="max-w-full mx-auto grid grid-cols-1 md:grid-cols-12 gap-4">
+        <div className="w-full">
+            <div className="grid grid-cols-1 gap-4 lg:grid-cols-12">
 
 
-                <div className="col-span-8">
+                <div className="min-w-0 lg:col-span-8">
 
                     <ListarCliente onClienteSeleccionado={setCliente} />
                 </div>
 
-                <div className="md:col-span-4">
+                <div className="min-w-0 lg:col-span-4">
                     <div className="bg-white rounded-lg shadow-md p-6">
                         <h2 className="text-xl font-bold mb-4">Crear Medidor</h2>
 

@@ -6,13 +6,18 @@ import { SubItem } from "./SubItem";
 import {
   MdDashboard,
   MdSpeed,
-  MdBook,
-  MdCreditCard,
-  MdAccountBalanceWallet,
+  MdMenuBook,
+  MdLocalOffer,
+  MdReceiptLong,
+  MdPointOfSale,
+  MdPayments,
   MdGroup,
   MdAdd,
-  MdList,
-  MdSettings,
+  MdFormatListBulleted,
+  MdWarningAmber,
+  MdCategory,
+  MdLock,
+  MdAccountBalanceWallet,
   MdLogout,
   MdMenu,
 } from "react-icons/md";
@@ -88,8 +93,8 @@ export const Menu: React.FC = () => {
                 expandedMenus={expandedMenus}
               >
                 <SubItem to="/medidor/crear" icon={<MdAdd />} text="Crear" />
-                <SubItem to="/medidor/listar" icon={<MdList />} text="Listar" />
-                <SubItem to="/medidor/moroso" icon={<MdList />} text="Morosos" />
+                <SubItem to="/medidor/listar" icon={<MdFormatListBulleted />} text="Listar" />
+                <SubItem to="/medidor/moroso" icon={<MdWarningAmber />} text="Morosos" />
               </MenuGroup>
 
 
@@ -97,13 +102,13 @@ export const Menu: React.FC = () => {
               {(usuario.rol === "ADMINISTRADOR" || usuario.rol === "LECTURADOR") && (
                 <MenuGroup
                   name="lecturas"
-                  icon={<MdBook className="text-xl" />}
+                  icon={<MdMenuBook className="text-xl" />}
                   title="Lecturas"
                   toggleSubmenu={toggleSubmenu}
                   expandedMenus={expandedMenus}
                 >
                   <SubItem to="/lectura/realizar" icon={<MdAdd />} text="Crear" />
-                  <SubItem to="/lectura/listar" icon={<MdList />} text="Listar" />
+                  <SubItem to="/lectura/listar" icon={<MdFormatListBulleted />} text="Listar" />
                 </MenuGroup>
               )}
 
@@ -111,12 +116,12 @@ export const Menu: React.FC = () => {
               {usuario.rol === "ADMINISTRADOR" && (
                 <MenuGroup
                   name="tarifa"
-                  icon={<MdCreditCard className="text-xl" />}
+                  icon={<MdLocalOffer className="text-xl" />}
                   title="Tarifa"
                   toggleSubmenu={toggleSubmenu}
                   expandedMenus={expandedMenus}
                 >
-                  <SubItem to="/tarifa/listar" icon={<MdList />} text="Listar tarifas" />
+                  <SubItem to="/tarifa/listar" icon={<MdFormatListBulleted />} text="Listar tarifas" />
                 </MenuGroup>
               )}
 
@@ -124,29 +129,29 @@ export const Menu: React.FC = () => {
               {usuario.rol === "ADMINISTRADOR" && (
                 <MenuGroup
                   name="gastos"
-                  icon={<MdAccountBalanceWallet className="text-xl" />}
+                  icon={<MdReceiptLong className="text-xl" />}
                   title="Gastos"
                   toggleSubmenu={toggleSubmenu}
                   expandedMenus={expandedMenus}
                 >
                   <SubItem to="/gastos/crear" icon={<MdAdd />} text="Registrar" />
-                  <SubItem to="/gastos/listar" icon={<MdList />} text="Listar" />
-                  <SubItem to="/gastos/categorias" icon={<MdSettings />} text="Categorías" />
+                  <SubItem to="/gastos/listar" icon={<MdFormatListBulleted />} text="Listar" />
+                  <SubItem to="/gastos/categorias" icon={<MdCategory />} text="Categorías" />
                 </MenuGroup>
               )}
 
               {usuario.rol === "ADMINISTRADOR" && (
                 <MenuGroup
                   name="Caja"
-                  icon={<MdAccountBalanceWallet className="text-xl" />}
+                  icon={<MdPointOfSale className="text-xl" />}
                   title="Caja"
                   toggleSubmenu={toggleSubmenu}
                   expandedMenus={expandedMenus}
                 >
-                  <SubItem to="/listar/caja" icon={<MdAdd />} text="listar caja" />
-                  <SubItem to="/cerrar/caja" icon={<MdAdd />} text="Cerra caja" />
-                  <SubItem to="/listar/caja/chica" icon={<MdList />} text="Listar caja chica" />
-                    <SubItem to="/cerrar/caja/chica" icon={<MdList />} text="Cerra caja chica" />
+                  <SubItem to="/listar/caja" icon={<MdFormatListBulleted />} text="Listar caja" />
+                  <SubItem to="/cerrar/caja" icon={<MdLock />} text="Cerrar caja" />
+                  <SubItem to="/listar/caja/chica" icon={<MdAccountBalanceWallet />} text="Listar caja chica" />
+                  <SubItem to="/cerrar/caja/chica" icon={<MdLock />} text="Cerrar caja chica" />
                 </MenuGroup>
               )}
 
@@ -154,13 +159,13 @@ export const Menu: React.FC = () => {
               {usuario.rol === "ADMINISTRADOR" && (
                 <MenuGroup
                   name="pagos"
-                  icon={<MdCreditCard className="text-xl" />}
+                  icon={<MdPayments className="text-xl" />}
                   title="Pagos"
                   toggleSubmenu={toggleSubmenu}
                   expandedMenus={expandedMenus}
                 >
                   <SubItem to="/pago/realizar" icon={<MdAdd />} text="Realizar pago" />
-                  <SubItem to="/pago/listar" icon={<MdList />} text="Listar pagos" />
+                  <SubItem to="/pago/listar" icon={<MdFormatListBulleted />} text="Listar pagos" />
                 </MenuGroup>
               )}
 

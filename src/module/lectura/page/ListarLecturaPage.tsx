@@ -68,86 +68,90 @@ export const ListarLecturasPage = () => {
     };
 
     return (
-        <div className="overflow-x-auto  rounded-lg p-4">
-            <h2 className="text-2xl font-semibold mb-6 text-center text-gray-800">
+        <div className="w-full">
+            <h2 className="mb-4 text-xl font-semibold text-slate-800">
                 Lecturas de Medidores
             </h2>
 
-            {/* Filtro de fechas */}
-            <div className="flex gap-2 mb-4">
+            <div className="mb-4 grid grid-cols-1 gap-2 sm:grid-cols-[1fr_1fr_auto]">
                 <input
                     type="date"
                     value={fechaInicio}
                     onChange={(e) => setFechaInicio(e.target.value)}
-                    className="w-full rounded-lg border border-gray-300 px-2 py-2 text-sm focus:border-blue-500 focus:ring-2 focus:ring-blue-200"
+                    className="w-full min-w-0 rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm text-slate-700 outline-none focus:border-sky-400 focus:ring-2 focus:ring-sky-100"
                 />
                 <input
                     type="date"
                     value={fechaFin}
                     onChange={(e) => setFechaFin(e.target.value)}
-                    className="w-full rounded-lg border border-gray-300 px-2 py-2 text-sm focus:border-blue-500 focus:ring-2 focus:ring-blue-200"
+                    className="w-full min-w-0 rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm text-slate-700 outline-none focus:border-sky-400 focus:ring-2 focus:ring-sky-100"
                 />
                 <button
                     onClick={() => listarLecturasRegistradas(fechaInicio, fechaFin)}
-                    className="flex items-center justify-center gap-2 rounded-lg bg-sky-700 px-4 py-2 text-sm font-semibold text-white hover:bg-sky-800 transition-colors focus:outline-none focus:ring-2 focus:ring-sky-300"
+                    className="w-full rounded-lg bg-sky-700 px-4 py-2 text-sm font-medium text-white hover:bg-sky-800 sm:w-auto"
                 >
                     🔍 Buscar
                 </button>
             </div>
 
-            <table className="min-w-full divide-y divide-gray-200">
-                <thead className="bg-gray-100">
-                    <tr>
-                        <th className="px-4 py-2 text-left text-sm font-medium text-gray-700">Medidor</th>
-                        <th className="px-4 py-2 text-left text-sm font-medium text-gray-700">Mes</th>
-                        <th className="px-4 py-2 text-left text-sm font-medium text-gray-700">Lectura Anterior</th>
-                        <th className="px-4 py-2 text-left text-sm font-medium text-gray-700">Lectura Actual</th>
-                        <th className="px-4 py-2 text-left text-sm font-medium text-gray-700">Consumo</th>
-                        <th className="px-4 py-2 text-left text-sm font-medium text-gray-700">Costo</th>
-                        <th className="px-4 py-2 text-left text-sm font-medium text-gray-700">Estado</th>
-                        <th className="px-4 py-2 text-left text-sm font-medium text-gray-700">Acciones</th>
-                    </tr>
-                </thead>
-                <tbody className="divide-y divide-gray-200 bg-white text-sm">
-                    {listarLecturas.map((item) => (
-                        <tr key={item._id}>
-                            <td className="px-4 py-2">{item.numeroMedidor}</td>
-                            <td className="px-4 py-2">{item.mes}-{item.gestion}</td>
-                            <td className="px-4 py-2">{item.lecturaAnterior}</td>
-                            <td className="px-4 py-2">{item.lecturaActual}</td>
-                            <td className="px-4 py-2">{item.consumoTotal}</td>
-                            <td className="px-4 py-2">bs {item.costoApagar}</td>
-                            <td className="px-4 py-2">{item.estado}</td>
-                            <td className="px-4 py-2 space-x-2">
-                                <button
-                                    onClick={() => eliminarLectura(item)}
-                                    className="bg-red-600 text-white px-2 py-1 rounded hover:bg-red-700 text-xs"
-                                >
-                                    Eliminar
-                                </button>
-                                <button
-                                    onClick={() => navigate(`/lectura/detalle/${item.idMedidor}/${item._id}`)}
-                                    className="bg-sky-700 text-white px-2 py-1 rounded hover:bg-sky-800 text-xs"
-                                >
-                                    Recibo
-                                </button>
-                            </td>
-                        </tr>
-                    ))}
-                </tbody>
-            </table>
+            <div className="overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm">
+                <div className="overflow-x-auto">
+                    <table className="w-full min-w-[900px] text-sm">
+                        <thead>
+                            <tr className="border-b border-slate-200 bg-slate-50">
+                                <th className="whitespace-nowrap px-3 py-2.5 text-left text-xs font-semibold uppercase tracking-wide text-slate-500">Medidor</th>
+                                <th className="whitespace-nowrap px-3 py-2.5 text-left text-xs font-semibold uppercase tracking-wide text-slate-500">Mes</th>
+                                <th className="whitespace-nowrap px-3 py-2.5 text-left text-xs font-semibold uppercase tracking-wide text-slate-500">Lectura Anterior</th>
+                                <th className="whitespace-nowrap px-3 py-2.5 text-left text-xs font-semibold uppercase tracking-wide text-slate-500">Lectura Actual</th>
+                                <th className="whitespace-nowrap px-3 py-2.5 text-left text-xs font-semibold uppercase tracking-wide text-slate-500">Consumo</th>
+                                <th className="whitespace-nowrap px-3 py-2.5 text-left text-xs font-semibold uppercase tracking-wide text-slate-500">Costo</th>
+                                <th className="whitespace-nowrap px-3 py-2.5 text-left text-xs font-semibold uppercase tracking-wide text-slate-500">Estado</th>
+                                <th className="whitespace-nowrap px-3 py-2.5 text-left text-xs font-semibold uppercase tracking-wide text-slate-500">Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody className="divide-y divide-slate-100 bg-white">
+                            {listarLecturas.map((item) => (
+                                <tr key={item._id} className="hover:bg-blue-50/50">
+                                    <td className="whitespace-nowrap px-3 py-2.5">{item.numeroMedidor}</td>
+                                    <td className="whitespace-nowrap px-3 py-2.5">{item.mes}-{item.gestion}</td>
+                                    <td className="whitespace-nowrap px-3 py-2.5">{item.lecturaAnterior}</td>
+                                    <td className="whitespace-nowrap px-3 py-2.5">{item.lecturaActual}</td>
+                                    <td className="whitespace-nowrap px-3 py-2.5">{item.consumoTotal}</td>
+                                    <td className="whitespace-nowrap px-3 py-2.5">bs {item.costoApagar}</td>
+                                    <td className="whitespace-nowrap px-3 py-2.5">{item.estado}</td>
+                                    <td className="whitespace-nowrap px-3 py-2.5">
+                                        <div className="inline-flex flex-nowrap gap-2">
+                                            <button
+                                                onClick={() => eliminarLectura(item)}
+                                                className="rounded bg-red-600 px-2 py-1 text-xs text-white hover:bg-red-700"
+                                            >
+                                                Eliminar
+                                            </button>
+                                            <button
+                                                onClick={() => navigate(`/lectura/detalle/${item.idMedidor}/${item._id}`)}
+                                                className="rounded bg-sky-700 px-2 py-1 text-xs text-white hover:bg-sky-800"
+                                            >
+                                                Recibo
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
+                </div>
 
-            {/* Paginación simple */}
-            <div className="flex justify-end mt-4 gap-2">
-                {Array.from({ length: totalPaginas }).map((_, idx) => (
-                    <button
-                        key={idx}
-                        onClick={() => onPageChange(idx)}
-                        className={`px-3 py-1 rounded ${pagina === idx ? "bg-blue-600 text-white" : "bg-gray-200"}`}
-                    >
-                        {idx + 1}
-                    </button>
-                ))}
+                <div className="flex flex-wrap justify-center gap-2 border-t border-slate-100 px-3 py-3 sm:justify-end">
+                    {Array.from({ length: totalPaginas }).map((_, idx) => (
+                        <button
+                            key={idx}
+                            onClick={() => onPageChange(idx)}
+                            className={`min-w-8 rounded px-3 py-1 text-sm ${pagina === idx ? "bg-blue-600 text-white" : "bg-gray-200"}`}
+                        >
+                            {idx + 1}
+                        </button>
+                    ))}
+                </div>
             </div>
         </div>
     );

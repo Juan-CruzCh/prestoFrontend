@@ -17,45 +17,45 @@ export const ListarGastosPage = () => {
     })()
   }, [])
   return (
-    <div>
-      <div className="mb-4 flex flex-wrap items-end justify-between gap-3">
+    <div className="w-full">
+      <div className="mb-4 flex flex-col gap-3 lg:flex-row lg:items-end lg:justify-between">
         <div>
           <h1 className="text-xl font-semibold text-slate-800">Listado de gastos</h1>
           <p className="mt-1 text-sm text-slate-500">Gastos registrados en caja chica</p>
         </div>
 
-        <div className="flex flex-wrap items-end gap-3">
-          <div>
+        <div className="grid w-full grid-cols-1 gap-3 sm:grid-cols-2 lg:w-auto lg:grid-cols-[minmax(0,8rem)_minmax(0,10rem)_minmax(0,10rem)_auto]">
+          <div className="min-w-0">
             <label className="mb-1 block text-xs font-medium text-slate-500">
               Código
             </label>
             <input
               type="text"
               placeholder="Buscar cód."
-              className="w-36 rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm text-slate-700 outline-none transition focus:border-blue-400 focus:ring-2 focus:ring-blue-100"
+              className="w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm text-slate-700 outline-none transition focus:border-blue-400 focus:ring-2 focus:ring-blue-100"
             />
           </div>
-          <div>
+          <div className="min-w-0">
             <label className="mb-1 block text-xs font-medium text-slate-500">
               Desde
             </label>
             <input
               type="date"
-              className="rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm text-slate-700 outline-none transition focus:border-blue-400 focus:ring-2 focus:ring-blue-100"
+              className="w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm text-slate-700 outline-none transition focus:border-blue-400 focus:ring-2 focus:ring-blue-100"
             />
           </div>
-          <div>
+          <div className="min-w-0">
             <label className="mb-1 block text-xs font-medium text-slate-500">
               Hasta
             </label>
             <input
               type="date"
-              className="rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm text-slate-700 outline-none transition focus:border-blue-400 focus:ring-2 focus:ring-blue-100"
+              className="w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm text-slate-700 outline-none transition focus:border-blue-400 focus:ring-2 focus:ring-blue-100"
             />
           </div>
           <button
             type="button"
-            className="rounded-lg bg-sky-700 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-sky-800"
+            className="w-full rounded-lg bg-sky-700 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-sky-800 lg:mt-5"
           >
             Buscar
           </button>
@@ -64,7 +64,7 @@ export const ListarGastosPage = () => {
 
       <div className="overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm">
         <div className="overflow-x-auto">
-          <table className="min-w-full text-sm">
+          <table className="w-full min-w-[900px] text-sm">
             <thead>
               <tr className="border-b border-slate-200 bg-slate-50">
                 <th className="px-3 py-2.5 text-left text-xs font-semibold uppercase tracking-wide text-slate-500">

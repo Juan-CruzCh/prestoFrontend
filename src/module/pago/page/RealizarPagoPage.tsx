@@ -109,15 +109,15 @@ export const RealizarPagoPage = () => {
   };
 
   return (
-    <div className="min-h-screen py-10 px-4">
-      <h2 className="text-3xl font-bold text-center text-gray-800 mb-8">
+    <div className="w-full">
+      <h2 className="mb-6 text-xl font-semibold text-slate-800 sm:text-2xl">
         Realizar Pago
       </h2>
 
-      <div className="grid grid-cols-1 lg:grid-cols-5 gap-8">
+      <div className="grid grid-cols-1 gap-6 lg:grid-cols-5 lg:gap-8">
 
         {/* CLIENTES */}
-        <div className="lg:col-span-3">
+        <div className="min-w-0 lg:col-span-3">
 
 
           <ListarCliente onClienteSeleccionado={setCliente} />
@@ -126,15 +126,15 @@ export const RealizarPagoPage = () => {
         </div>
 
         {/* MEDIDORES */}
-        <div className="lg:col-span-2 space-y-6">
+        <div className="min-w-0 space-y-6 lg:col-span-2">
 
           {lecturasCliente.map((item) => (
             <div
               key={item._id}
-              className="border rounded-xl p-6 bg-white shadow-sm hover:shadow-md transition opacity-90"
+              className="border rounded-xl p-4 bg-white shadow-sm hover:shadow-md transition opacity-90 sm:p-6"
             >
               {/* MEDIDOR */}
-              <div className="flex items-center justify-between mb-3">
+              <div className="mb-3 flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
                 <label className="flex items-center gap-3 cursor-pointer">
                   <input
                     type="radio"
@@ -143,12 +143,12 @@ export const RealizarPagoPage = () => {
                     checked={medidorSeleccionado === item.numeroMedidor}
                     onChange={() => btnMedidor(item.numeroMedidor)}
                   />
-                  <span className="text-xl font-semibold text-gray-800">
+                  <span className="text-lg font-semibold text-gray-800 sm:text-xl">
                     Medidor {item.numeroMedidor}
                   </span>
                 </label>
 
-                <span className="px-3 py-1 rounded-full text-xs font-semibold">
+                <span className="px-3 py-1 rounded-full text-xs font-semibold w-fit">
                   {item.estado}
                 </span>
               </div>
@@ -158,53 +158,55 @@ export const RealizarPagoPage = () => {
               </p>
 
               {/* LECTURAS */}
-              <table className="w-full text-sm border rounded-lg">
-                <thead className="bg-gray-100">
-                  <tr>
-                    <th>Mes</th>
-                    <th>Anterior</th>
-                    <th>Actual</th>
-                    <th>Consumo</th>
-                    <th>Costo</th>
-                    <th>✔</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {item.lecturas.map((l) => (
-                    <tr key={l._id} className="hover:bg-gray-50">
-                      <td>{l.mes}</td>
-                      <td className="text-center">{l.lecturaAnterior}</td>
-                      <td className="text-center">{l.lecturaActual}</td>
-                      <td className="text-center">{l.consumoTotal}</td>
-                      <td className="text-center font-medium">
-                        {l.costoApagar} Bs
-                      </td>
-                      <td className="text-center">
-                        <input
-                          type="checkbox"
-                          disabled={medidorSeleccionado !== item.numeroMedidor}
-                          checked={lecturaSeleccionadas.includes(l._id)}
-                          onChange={(e) =>
-                            btnLectura(
-                              e.target.checked,
-                              l._id,
-                              l.costoApagar,
-                              l.mes,
-                              item._id
-                            )
-                          }
-                        />
-                      </td>
+              <div className="overflow-x-auto">
+                <table className="w-full min-w-[480px] text-sm border rounded-lg">
+                  <thead className="bg-gray-100">
+                    <tr>
+                      <th className="whitespace-nowrap px-2 py-1.5">Mes</th>
+                      <th className="whitespace-nowrap px-2 py-1.5">Anterior</th>
+                      <th className="whitespace-nowrap px-2 py-1.5">Actual</th>
+                      <th className="whitespace-nowrap px-2 py-1.5">Consumo</th>
+                      <th className="whitespace-nowrap px-2 py-1.5">Costo</th>
+                      <th className="whitespace-nowrap px-2 py-1.5">✔</th>
                     </tr>
-                  ))}
-                </tbody>
-              </table>
+                  </thead>
+                  <tbody>
+                    {item.lecturas.map((l) => (
+                      <tr key={l._id} className="hover:bg-gray-50">
+                        <td className="whitespace-nowrap px-2 py-1.5">{l.mes}</td>
+                        <td className="whitespace-nowrap px-2 py-1.5 text-center">{l.lecturaAnterior}</td>
+                        <td className="whitespace-nowrap px-2 py-1.5 text-center">{l.lecturaActual}</td>
+                        <td className="whitespace-nowrap px-2 py-1.5 text-center">{l.consumoTotal}</td>
+                        <td className="whitespace-nowrap px-2 py-1.5 text-center font-medium">
+                          {l.costoApagar} Bs
+                        </td>
+                        <td className="whitespace-nowrap px-2 py-1.5 text-center">
+                          <input
+                            type="checkbox"
+                            disabled={medidorSeleccionado !== item.numeroMedidor}
+                            checked={lecturaSeleccionadas.includes(l._id)}
+                            onChange={(e) =>
+                              btnLectura(
+                                e.target.checked,
+                                l._id,
+                                l.costoApagar,
+                                l.mes,
+                                item._id
+                              )
+                            }
+                          />
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
             </div>
           ))}
 
           {/* TOTAL */}
           <div className="flex justify-end">
-            <div className="bg-blue-50 border border-blue-200 rounded-lg px-6 py-3 text-blue-700 text-lg font-semibold">
+            <div className="w-full rounded-lg border border-blue-200 bg-blue-50 px-4 py-3 text-base font-semibold text-blue-700 sm:w-auto sm:px-6 sm:text-lg">
               Total a pagar: Bs {total}
             </div>
           </div>
@@ -213,7 +215,7 @@ export const RealizarPagoPage = () => {
           <div className="flex justify-end">
             <button
               onClick={btnRealizarPago}
-              className="bg-gradient-to-r from-sky-700 to-cyan-700 text-white px-10 py-3 rounded-xl font-semibold shadow-lg hover:scale-105 transition"
+              className="w-full rounded-xl bg-gradient-to-r from-sky-700 to-cyan-700 px-6 py-3 font-semibold text-white shadow-lg sm:w-auto sm:px-10"
             >
               Realizar Pago
             </button>

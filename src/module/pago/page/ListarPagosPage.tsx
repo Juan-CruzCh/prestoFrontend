@@ -74,152 +74,130 @@ export const ListarPagosPage = () => {
     listar();
   };
 
+  const inputFiltro =
+    "w-full min-w-0 rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm text-slate-700 outline-none focus:border-sky-400 focus:ring-2 focus:ring-sky-100";
+
   return (
-    <div className="overflow-x-auto">
-      <table className="min-w-full divide-y divide-gray-200">
+    <div className="w-full">
+      <div className="mb-4 grid grid-cols-1 gap-2 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-5">
+        <input value={codigo} onChange={e => setCodigo(e.target.value)}
+          placeholder="Cod. cliente"
+          className={inputFiltro} />
+        <input value={ci} onChange={e => setCi(e.target.value)}
+          placeholder="CI"
+          className={inputFiltro} />
+        <input value={nombre} onChange={e => setNombre(e.target.value)}
+          placeholder="Nombre"
+          className={inputFiltro} />
+        <input value={apellidoPaterno} onChange={e => setApellidoPaterno(e.target.value)}
+          placeholder="Apellido paterno"
+          className={inputFiltro} />
+        <input value={apellidoMaterno} onChange={e => setApellidoMaterno(e.target.value)}
+          placeholder="Apellido materno"
+          className={inputFiltro} />
+        <input value={numeroMedidor} onChange={e => setNumeroMedidor(e.target.value)}
+          placeholder="Número de medidor"
+          className={inputFiltro} />
+        <label className="flex items-center gap-2 rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm text-slate-600">
+          <input type="checkbox" onChange={btnDesabilitarFechas} />
+          <span>Deshabilitar fechas</span>
+        </label>
+        <input type="date" disabled={disableRangoFechas}
+          value={fechaInicio}
+          onChange={e => setFechaInicio(e.target.value)}
+          className={inputFiltro} />
+        <input type="date" disabled={disableRangoFechas}
+          value={fechaFin}
+          onChange={e => setFechaFin(e.target.value)}
+          className={inputFiltro} />
+        <button
+          onClick={() => listar()}
+          className="w-full rounded-lg bg-sky-700 px-4 py-2 text-sm font-medium text-white hover:bg-sky-800">
+          Buscar
+        </button>
+      </div>
 
-        <thead className="bg-gray-50">
-          <tr>
-            <th className="px-2 py-1">
-              <input value={codigo} onChange={e => setCodigo(e.target.value)}
-                placeholder="Cod. cliente"
-                className="w-full border rounded px-2 py-1 text-sm" />
-            </th>
-            <th className="px-2 py-1">
-              <input value={ci} onChange={e => setCi(e.target.value)}
-                placeholder="CI"
-                className="w-full border rounded px-2 py-1 text-sm" />
-            </th>
-            <th className="px-2 py-1">
-              <input value={nombre} onChange={e => setNombre(e.target.value)}
-                placeholder="Nombre"
-                className="w-full border rounded px-2 py-1 text-sm" />
-            </th>
-            <th className="px-2 py-1">
-              <input value={apellidoPaterno} onChange={e => setApellidoPaterno(e.target.value)}
-                placeholder="Apellido paterno"
-                className="w-full border rounded px-2 py-1 text-sm" />
-            </th>
-            <th className="px-2 py-1">
-              <input value={apellidoMaterno} onChange={e => setApellidoMaterno(e.target.value)}
-                placeholder="Apellido materno"
-                className="w-full border rounded px-2 py-1 text-sm" />
-            </th>
-            <th className="px-2 py-1">
-              <input value={numeroMedidor} onChange={e => setNumeroMedidor(e.target.value)}
-                placeholder="Número de medidor"
-                className="w-full border rounded px-2 py-1 text-sm" />
-            </th>
+      <div className="overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm">
+        <div className="overflow-x-auto">
+          <table className="w-full min-w-[1100px] text-sm">
+            <thead className="bg-slate-50">
+              <tr>
+                <th className="whitespace-nowrap px-3 py-2.5 text-left text-xs font-semibold uppercase tracking-wide text-slate-500">Cod. cliente</th>
+                <th className="whitespace-nowrap px-3 py-2.5 text-left text-xs font-semibold uppercase tracking-wide text-slate-500">CI</th>
+                <th className="whitespace-nowrap px-3 py-2.5 text-left text-xs font-semibold uppercase tracking-wide text-slate-500">Nombre</th>
+                <th className="whitespace-nowrap px-3 py-2.5 text-left text-xs font-semibold uppercase tracking-wide text-slate-500">Apellido paterno</th>
+                <th className="whitespace-nowrap px-3 py-2.5 text-left text-xs font-semibold uppercase tracking-wide text-slate-500">Apellido materno</th>
+                <th className="whitespace-nowrap px-3 py-2.5 text-left text-xs font-semibold uppercase tracking-wide text-slate-500">Medidor</th>
+                <th className="whitespace-nowrap px-3 py-2.5 text-left text-xs font-semibold uppercase tracking-wide text-slate-500">Total</th>
+                <th className="whitespace-nowrap px-3 py-2.5 text-left text-xs font-semibold uppercase tracking-wide text-slate-500">Fecha</th>
+                <th className="whitespace-nowrap px-3 py-2.5 text-left text-xs font-semibold uppercase tracking-wide text-slate-500">Detalle</th>
+                <th className="whitespace-nowrap px-3 py-2.5 text-left text-xs font-semibold uppercase tracking-wide text-slate-500">Recibo</th>
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-slate-100 bg-white">
+              {pagos.map(item => (
+                <tr key={item._id} className="hover:bg-blue-50/50">
+                  <td className="whitespace-nowrap px-3 py-2.5">{item.codigoCliente}</td>
+                  <td className="whitespace-nowrap px-3 py-2.5">{item.ci}</td>
+                  <td className="whitespace-nowrap px-3 py-2.5">{item.nombre}</td>
+                  <td className="whitespace-nowrap px-3 py-2.5">{item.apellidoPaterno}</td>
+                  <td className="whitespace-nowrap px-3 py-2.5">{item.apellidoMaterno}</td>
+                  <td className="whitespace-nowrap px-3 py-2.5">{item.numeroMedidor}</td>
+                  <td className="whitespace-nowrap px-3 py-2.5">{item.total}</td>
+                  <td className="whitespace-nowrap px-3 py-2.5">
+                    {new Date(item.fecha).toLocaleString()}
+                  </td>
+                  <td className="px-3 py-2.5">
+                    <div className="max-w-[260px] overflow-x-auto">
+                      <table className="min-w-[220px] w-full border text-xs">
+                        <thead>
+                          <tr>
+                            <th className="px-1 py-0.5">Mes</th>
+                            <th className="px-1 py-0.5">Anterior</th>
+                            <th className="px-1 py-0.5">Actual</th>
+                            <th className="px-1 py-0.5">Consumo</th>
+                            <th className="px-1 py-0.5">Costo</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {item.detallePago.map((d, i) => (
+                            <tr key={i}>
+                              <td className="px-1 py-0.5">{d.mes}</td>
+                              <td className="px-1 py-0.5">{d.lecturaAnterior}</td>
+                              <td className="px-1 py-0.5">{d.lecturaActual}</td>
+                              <td className="px-1 py-0.5">{d.consumoTotal}</td>
+                              <td className="px-1 py-0.5">{d.costoPagado} Bs</td>
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table>
+                    </div>
+                  </td>
+                  <td className="whitespace-nowrap px-3 py-2.5">
+                    <button
+                      onClick={() => navigate(`/pago/detalle/${item._id}`)}
+                      className="rounded bg-sky-700 px-3 py-1 text-xs text-white hover:bg-sky-800">
+                      Ver Recibo
+                    </button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
 
-            <th className="px-2 py-1 flex items-center gap-2">
-              <input type="checkbox" onChange={btnDesabilitarFechas} />
-              <span className="text-sm">Deshabilitar fechas</span>
-            </th>
-
-            <th className="px-2 py-1">
-              <input type="date" disabled={disableRangoFechas}
-                value={fechaInicio}
-                onChange={e => setFechaInicio(e.target.value)}
-                className="w-full border rounded px-2 py-1 text-sm" />
-            </th>
-
-            <th className="px-2 py-1">
-              <input type="date" disabled={disableRangoFechas}
-                value={fechaFin}
-                onChange={e => setFechaFin(e.target.value)}
-                className="w-full border rounded px-2 py-1 text-sm" />
-            </th>
-
-            <th className="px-2 py-1">
-              <button
-                onClick={() => listar()}
-                className="bg-sky-700 text-white px-3 py-1 rounded text-sm w-full hover:bg-sky-800">
-                Buscar
-              </button>
-            </th>
-          </tr>
-        </thead>
-
-        {/* HEADER */}
-        <thead className="bg-gray-100">
-          <tr>
-            <th className="px-4 py-2">Cod. cliente</th>
-            <th className="px-4 py-2">CI</th>
-            <th className="px-4 py-2">Nombre</th>
-            <th className="px-4 py-2">Apellido paterno</th>
-            <th className="px-4 py-2">Apellido materno</th>
-            <th className="px-4 py-2">Medidor</th>
-            <th className="px-4 py-2">Total</th>
-            <th className="px-4 py-2">Fecha</th>
-            <th className="px-4 py-2">Detalle</th>
-            <th className="px-4 py-2">Recibo</th>
-          </tr>
-        </thead>
-
-        {/* BODY */}
-        <tbody className="bg-white text-sm">
-          {pagos.map(item => (
-            <tr key={item._id}>
-              <td className="px-4 py-2">{item.codigoCliente}</td>
-              <td className="px-4 py-2">{item.ci}</td>
-              <td className="px-4 py-2">{item.nombre}</td>
-              <td className="px-4 py-2">{item.apellidoPaterno}</td>
-              <td className="px-4 py-2">{item.apellidoMaterno}</td>
-              <td className="px-4 py-2">{item.numeroMedidor}</td>
-              <td className="px-4 py-2">{item.total}</td>
-              <td className="px-4 py-2">
-                {new Date(item.fecha).toLocaleString()}
-              </td>
-
-              <td className="px-4 py-2">
-                <table className="border text-xs w-full">
-                  <thead>
-                    <tr>
-                      <th>Mes</th>
-                      <th>Anterior</th>
-                      <th>Actual</th>
-                      <th>Consumo</th>
-                      <th>Costo</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {item.detallePago.map((d, i) => (
-                      <tr key={i}>
-                        <td>{d.mes}</td>
-                        <td>{d.lecturaAnterior}</td>
-                        <td>{d.lecturaActual}</td>
-                        <td>{d.consumoTotal}</td>
-                        <td>{d.costoPagado} Bs</td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </td>
-
-              <td className="px-4 py-2">
-                <button
-                  onClick={() => navigate(`/pago/detalle/${item._id}`)}
-                  className="bg-sky-700 text-white px-3 py-1 rounded text-xs hover:bg-sky-800">
-                  Ver Recibo
-                </button>
-              </td>
-            </tr>
+        <div className="flex flex-wrap justify-center gap-2 border-t border-slate-100 px-3 py-3">
+          {Array.from({ length: paginas }).map((_, i) => (
+            <button
+              key={i}
+              onClick={() => onPageChange(i + 1)}
+              className={`min-w-8 rounded border px-3 py-1 text-sm ${pagina === i + 1 ? "bg-blue-600 text-white" : ""
+                }`}
+            >
+              {i + 1}
+            </button>
           ))}
-        </tbody>
-      </table>
-
-      {/* PAGINADOR SIMPLE */}
-      <div className="flex justify-center gap-2 py-3">
-        {Array.from({ length: paginas }).map((_, i) => (
-          <button
-            key={i}
-            onClick={() => onPageChange(i + 1)}
-            className={`px-3 py-1 border rounded ${pagina === i + 1 ? "bg-blue-600 text-white" : ""
-              }`}
-          >
-            {i + 1}
-          </button>
-        ))}
+        </div>
       </div>
     </div>
   );

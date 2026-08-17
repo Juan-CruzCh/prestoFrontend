@@ -67,7 +67,7 @@ export const CrearTarifaPage = () => {
   };
 
   return (
-    <div className="p-6 max-w-4xl mx-auto min-h-screen bg-gray-50">
+    <div className="mx-auto w-full max-w-4xl">
       <h1 className="text-2xl font-semibold mb-6 text-gray-800">Crear Tarifa</h1>
 
       <form onSubmit={handleSubmit(agregarRango)} className="bg-white p-6 rounded-lg shadow space-y-6">
@@ -92,7 +92,7 @@ export const CrearTarifaPage = () => {
         {/* Agregar Rango */}
         <div className="border p-4 rounded-lg bg-gray-50 mb-4">
           <h2 className="text-lg font-semibold mb-3">Agregar Rango</h2>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-4">
             {["rango1", "rango2", "costo", "iva"].map((campo) => (
               <div key={campo}>
                 <label className="block text-sm font-medium">{campo === "costo" ? "Costo (Bs)" : campo === "iva" ? "IVA (%)" : campo.charAt(0).toUpperCase() + campo.slice(1)}</label>
@@ -129,7 +129,7 @@ export const CrearTarifaPage = () => {
       <div>
         <h2 className="text-lg font-semibold mb-3">Rangos Agregados</h2>
         <div className="overflow-x-auto">
-          <table className="min-w-full border border-gray-200">
+          <table className="w-full min-w-[560px] border border-gray-200">
             <thead className="bg-gray-100">
               <tr>
                 <th className="px-4 py-2 border">Rango 1</th>

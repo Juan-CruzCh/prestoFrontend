@@ -54,7 +54,7 @@ export const ListarCategoriaGasto = () => {
 
   return (
     <div>
-      <div className="mb-4 flex flex-wrap items-end justify-between gap-3">
+      <div className="mb-4 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-end sm:justify-between">
         <div>
           <h1 className="text-xl font-semibold text-slate-800">
             Categorías de gasto
@@ -72,7 +72,7 @@ export const ListarCategoriaGasto = () => {
 
       <div className="overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm">
         <div className="overflow-x-auto">
-          <table className="min-w-full text-sm">
+          <table className="w-full min-w-[360px] text-sm">
             <thead>
               <tr className="border-b border-slate-200 bg-slate-50">
                 <th className="px-3 py-2.5 text-left text-xs font-semibold uppercase tracking-wide text-slate-500">

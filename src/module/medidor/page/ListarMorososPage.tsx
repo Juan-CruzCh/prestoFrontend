@@ -52,85 +52,66 @@ export const ListarMorososPage = () => {
 
 
 
-  return (
-    <div className="w-full h-full max-w-full mx-auto">
-      <div className="grid grid-cols-1 md:grid-cols-12 gap-4">
-        <div className="md:col-span-12 order-1">
-          <div className="overflow-x-auto rounded-lg shadow-sm">
-            <table className="min-w-full divide-y divide-gray-200 text-sm">
-              <thead className="bg-gray-100">
-                <tr>
-                  <th>
-                    <input value={codigo} onChange={e => setCodigo(e.target.value)} type="text" placeholder="Código" className="w-full px-2 py-1 border rounded" />
-                  </th>
-                  <th>
-                    <input value={ci} onChange={e => setCi(e.target.value)} type="text" placeholder="CI" className="w-full px-2 py-1 border rounded" />
-                  </th>
-                  <th>
-                    <input value={nombre} onChange={e => setNombre(e.target.value)} type="text" placeholder="Nombre" className="w-full px-2 py-1 border rounded" />
-                  </th>
-                  <th>
-                    <input value={apellidoPaterno} onChange={e => setApellidoPaterno(e.target.value)} type="text" placeholder="Apellido Paterno" className="w-full px-2 py-1 border rounded" />
-                  </th>
-                  <th>
-                    <input value={apellidoMaterno} onChange={e => setApellidoMaterno(e.target.value)} type="text" placeholder="Apellido Materno" className="w-full px-2 py-1 border rounded" />
-                  </th>
-                  <th>
-                    <input value={direccion} onChange={e => setDireccion(e.target.value)} type="text" placeholder="Dirección" className="w-full px-2 py-1 border rounded" />
-                  </th>
-                  <th>
-                    <input value={numeroMedidor} onChange={e => setNumeroMedidor(e.target.value)} type="text" placeholder="N° Medidor" className="w-full px-2 py-1 border rounded" />
-                  </th>
-                  <th>
-                    <select value={tarifa} onChange={e => setTarifa(e.target.value)} className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
-                      <option value="">Todos</option>
-                      {tarifas.map(item => (
-                        <option key={item._id} value={item._id}>{item.nombre}</option>
-                      ))}
-                    </select>
-                  </th>
-                  <th>
-                    <select value={estado} onChange={e => setEstado(e.target.value)} className="w-full rounded-lg border border-gray-300 px-2 py-1">
-                      <option value="">Todos</option>
-                      <option value="ACTIVO">ACTIVO</option>
-                      <option value="INACTIVO">INACTIVO</option>
-                      <option value="MANTENIMIENTO">MANTENIMIENTO</option>
-                      <option value="EN_CORTE">EN_CORTE</option>
-                    </select>
-                  </th>
-                  <th>
-                    <button onClick={btnBuscar} className="bg-sky-700 hover:bg-sky-800 text-white font-bold py-2 px-4 rounded">Buscar</button>
-                  </th>
-                </tr>
-                <tr>
-                  {["Código Cliente", "CI", "Nombre", "Apellido Paterno", "Apellido Materno", "Dirección", "Número de Medidor", "Tarifa", "Estado", "Lecturas Pendientes"].map((header, i) => (
-                    <th key={i} className="px-4 py-2 text-left font-medium text-gray-700">{header}</th>
-                  ))}
-                </tr>
-              </thead>
-              <tbody className="bg-white divide-y divide-gray-200">
-                {listarMedidorClientes.map(item => (
-                  <tr key={item._id}>
-                    <td className="px-4 py-2">{item.codigo}</td>
-                    <td className="px-4 py-2">{item.ci}</td>
-                    <td className="px-4 py-2">{item.nombre}</td>
-                    <td className="px-4 py-2">{item.apellidoPaterno}</td>
-                    <td className="px-4 py-2">{item.apellidoMaterno}</td>
-                    <td className="px-4 py-2">{item.direccion}</td>
-                    <td className="px-4 py-2">{item.numeroMedidor}</td>
-                    <td className="px-4 py-2">{item.tarifa}</td>
-                    <td className="px-4 py-2">
-                      <span className="px-2 py-1 bg-green-100 text-green-700 rounded text-xs font-medium">{item.estado}</span>
-                    </td>
-                    <td className="px-4 py-2 flex gap-2">
-                      {item.lecturasPendientes}
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+  const inputFiltro =
+    "w-full min-w-0 rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm text-slate-700 outline-none focus:border-sky-400 focus:ring-2 focus:ring-sky-100";
 
-          </div>
+  return (
+    <div className="w-full">
+      <div className="mb-4 grid grid-cols-1 gap-2 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-5">
+        <input value={codigo} onChange={e => setCodigo(e.target.value)} type="text" placeholder="Código" className={inputFiltro} />
+        <input value={ci} onChange={e => setCi(e.target.value)} type="text" placeholder="CI" className={inputFiltro} />
+        <input value={nombre} onChange={e => setNombre(e.target.value)} type="text" placeholder="Nombre" className={inputFiltro} />
+        <input value={apellidoPaterno} onChange={e => setApellidoPaterno(e.target.value)} type="text" placeholder="Apellido Paterno" className={inputFiltro} />
+        <input value={apellidoMaterno} onChange={e => setApellidoMaterno(e.target.value)} type="text" placeholder="Apellido Materno" className={inputFiltro} />
+        <input value={direccion} onChange={e => setDireccion(e.target.value)} type="text" placeholder="Dirección" className={inputFiltro} />
+        <input value={numeroMedidor} onChange={e => setNumeroMedidor(e.target.value)} type="text" placeholder="N° Medidor" className={inputFiltro} />
+        <select value={tarifa} onChange={e => setTarifa(e.target.value)} className={inputFiltro}>
+          <option value="">Todos</option>
+          {tarifas.map(item => (
+            <option key={item._id} value={item._id}>{item.nombre}</option>
+          ))}
+        </select>
+        <select value={estado} onChange={e => setEstado(e.target.value)} className={inputFiltro}>
+          <option value="">Todos</option>
+          <option value="ACTIVO">ACTIVO</option>
+          <option value="INACTIVO">INACTIVO</option>
+          <option value="MANTENIMIENTO">MANTENIMIENTO</option>
+          <option value="EN_CORTE">EN_CORTE</option>
+        </select>
+        <button onClick={btnBuscar} className="w-full rounded-lg bg-sky-700 px-4 py-2 text-sm font-medium text-white hover:bg-sky-800">Buscar</button>
+      </div>
+
+      <div className="overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm">
+        <div className="overflow-x-auto">
+          <table className="w-full min-w-[1100px] text-sm">
+            <thead>
+              <tr className="border-b border-slate-200 bg-slate-50">
+                {["Código Cliente", "CI", "Nombre", "Apellido Paterno", "Apellido Materno", "Dirección", "Número de Medidor", "Tarifa", "Estado", "Lecturas Pendientes"].map((header, i) => (
+                  <th key={i} className="whitespace-nowrap px-3 py-2.5 text-left text-xs font-semibold uppercase tracking-wide text-slate-500">{header}</th>
+                ))}
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-slate-100 bg-white">
+              {listarMedidorClientes.map(item => (
+                <tr key={item._id} className="hover:bg-blue-50/50">
+                  <td className="whitespace-nowrap px-3 py-2.5">{item.codigo}</td>
+                  <td className="whitespace-nowrap px-3 py-2.5">{item.ci}</td>
+                  <td className="whitespace-nowrap px-3 py-2.5">{item.nombre}</td>
+                  <td className="whitespace-nowrap px-3 py-2.5">{item.apellidoPaterno}</td>
+                  <td className="whitespace-nowrap px-3 py-2.5">{item.apellidoMaterno}</td>
+                  <td className="whitespace-nowrap px-3 py-2.5">{item.direccion}</td>
+                  <td className="whitespace-nowrap px-3 py-2.5">{item.numeroMedidor}</td>
+                  <td className="whitespace-nowrap px-3 py-2.5">{item.tarifa}</td>
+                  <td className="whitespace-nowrap px-3 py-2.5">
+                    <span className="rounded bg-green-100 px-2 py-1 text-xs font-medium text-green-700">{item.estado}</span>
+                  </td>
+                  <td className="whitespace-nowrap px-3 py-2.5">
+                    {item.lecturasPendientes}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
         </div>
       </div>
     </div>

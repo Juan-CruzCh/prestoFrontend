@@ -7,6 +7,7 @@ import {
   MdTrendingDown,
   MdWarningAmber,
 } from "react-icons/md";
+import { FaWhatsapp } from "react-icons/fa";
 
 const pagosPorMes = [
   { mes: "Ene", monto: 12400 },
@@ -190,7 +191,7 @@ export const DashboardPage = () => {
         </div>
 
         <div className="overflow-x-auto">
-          <table className="min-w-full text-sm">
+          <table className="w-full min-w-[720px] text-sm">
             <thead>
               <tr className="border-b border-slate-200 bg-slate-50">
                 <th className="px-4 py-2.5 text-left text-xs font-semibold uppercase tracking-wide text-slate-500">
@@ -210,6 +211,9 @@ export const DashboardPage = () => {
                 </th>
                 <th className="px-4 py-2.5 text-left text-xs font-semibold uppercase tracking-wide text-slate-500">
                   Atraso
+                </th>
+                <th className="px-4 py-2.5 text-center text-xs font-semibold uppercase tracking-wide text-slate-500">
+                  Aviso
                 </th>
               </tr>
             </thead>
@@ -233,6 +237,15 @@ export const DashboardPage = () => {
                     >
                       {item.dias} días
                     </span>
+                  </td>
+                  <td className="px-4 py-2.5 text-center">
+                    <button
+                      type="button"
+                      title="Enviar notificación por WhatsApp"
+                      className="inline-flex h-8 w-8 items-center justify-center rounded-md bg-emerald-500 text-white transition-colors hover:bg-emerald-600"
+                    >
+                      <FaWhatsapp className="text-lg" />
+                    </button>
                   </td>
                 </tr>
               ))}
