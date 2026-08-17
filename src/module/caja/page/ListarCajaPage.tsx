@@ -1,6 +1,22 @@
+import { useEffect, useState } from "react";
 import { MdVisibility } from "react-icons/md";
+import type { cajaUsuarioI } from "../interface/caja";
+import { listarCajas } from "../service/caja";
 
 export const ListarCajaPage = () => {
+  const [cajas, setcajas] = useState<cajaUsuarioI[]>([])
+
+  useEffect(() => {
+    (async () => {
+      try {
+        const response = await listarCajas()
+        setcajas(response)
+      } catch (error) {
+        console.log(error);
+
+      }
+    })()
+  }, [])
   return (
     <div>
       <div className="mb-4 flex flex-wrap items-end justify-between gap-3">
@@ -57,9 +73,7 @@ export const ListarCajaPage = () => {
                 <th className="px-3 py-2.5 text-left text-xs font-semibold uppercase tracking-wide text-slate-500">
                   Cód.
                 </th>
-                <th className="px-3 py-2.5 text-left text-xs font-semibold uppercase tracking-wide text-slate-500">
-                  Tipo
-                </th>
+
                 <th className="px-3 py-2.5 text-left text-xs font-semibold uppercase tracking-wide text-slate-500">
                   Estado
                 </th>
@@ -90,86 +104,35 @@ export const ListarCajaPage = () => {
               </tr>
             </thead>
             <tbody className="divide-y divide-slate-100">
-              <tr className="hover:bg-blue-50/50">
-                <td className="px-3 py-2.5 font-medium text-slate-800">CAJ-00048</td>
-                <td className="px-3 py-2.5 text-slate-600">Caja</td>
-                <td className="px-3 py-2.5">
-                  <span className="inline-flex items-center gap-1 rounded-full bg-emerald-50 px-2 py-0.5 text-xs font-medium text-emerald-700">
-                    <span className="h-1.5 w-1.5 rounded-full bg-emerald-500" />
-                    Abierta
-                  </span>
-                </td>
-                <td className="px-3 py-2.5 text-slate-600">24/07/2026 08:15</td>
-                <td className="px-3 py-2.5 text-slate-700">Juan Pérez</td>
-                <td className="px-3 py-2.5 text-slate-600">Bs 500.00</td>
-                <td className="px-3 py-2.5 text-slate-600">Bs 2,850.00</td>
-                <td className="px-3 py-2.5 font-medium text-slate-800">Bs 2,350.00</td>
-                <td className="px-3 py-2.5 text-slate-600">18</td>
-                <td className="px-3 py-2.5 text-slate-400">—</td>
-                <td className="px-3 py-2.5">
-                  <button
-                    type="button"
-                    title="Ver detalle"
-                    className="inline-flex h-8 w-8 items-center justify-center rounded-md bg-blue-600 text-white hover:bg-blue-700"
-                  >
-                    <MdVisibility className="text-base" />
-                  </button>
-                </td>
-              </tr>
+              {
+                cajas.map((item) => (
+                  <tr className="hover:bg-blue-50/50">
+                    <td className="px-3 py-2.5">{item.codigo}</td>
 
-              <tr className="hover:bg-blue-50/50">
-                <td className="px-3 py-2.5 font-medium text-slate-800">CCH-00012</td>
-                <td className="px-3 py-2.5 text-slate-600">Caja chica</td>
-                <td className="px-3 py-2.5">
-                  <span className="inline-flex items-center gap-1 rounded-full bg-emerald-50 px-2 py-0.5 text-xs font-medium text-emerald-700">
-                    <span className="h-1.5 w-1.5 rounded-full bg-emerald-500" />
-                    Abierta
-                  </span>
-                </td>
-                <td className="px-3 py-2.5 text-slate-600">24/07/2026 08:20</td>
-                <td className="px-3 py-2.5 text-slate-700">María López</td>
-                <td className="px-3 py-2.5 text-slate-600">Bs 100.00</td>
-                <td className="px-3 py-2.5 text-slate-600">Bs 420.00</td>
-                <td className="px-3 py-2.5 font-medium text-slate-800">Bs 320.00</td>
-                <td className="px-3 py-2.5 text-slate-600">5</td>
-                <td className="px-3 py-2.5 text-slate-400">—</td>
-                <td className="px-3 py-2.5">
-                  <button
-                    type="button"
-                    title="Ver detalle"
-                    className="inline-flex h-8 w-8 items-center justify-center rounded-md bg-blue-600 text-white hover:bg-blue-700"
-                  >
-                    <MdVisibility className="text-base" />
-                  </button>
-                </td>
-              </tr>
-
-              <tr className="hover:bg-blue-50/50">
-                <td className="px-3 py-2.5 font-medium text-slate-800">CAJ-00047</td>
-                <td className="px-3 py-2.5 text-slate-600">Caja</td>
-                <td className="px-3 py-2.5">
-                  <span className="inline-flex items-center gap-1 rounded-full bg-rose-50 px-2 py-0.5 text-xs font-medium text-rose-700">
-                    <span className="h-1.5 w-1.5 rounded-full bg-rose-500" />
-                    Cerrada
-                  </span>
-                </td>
-                <td className="px-3 py-2.5 text-slate-600">23/07/2026 08:10</td>
-                <td className="px-3 py-2.5 text-slate-700">Juan Pérez</td>
-                <td className="px-3 py-2.5 text-slate-600">Bs 500.00</td>
-                <td className="px-3 py-2.5 text-slate-600">Bs 3,120.00</td>
-                <td className="px-3 py-2.5 font-medium text-slate-800">Bs 2,620.00</td>
-                <td className="px-3 py-2.5 text-slate-600">22</td>
-                <td className="px-3 py-2.5 text-slate-600">23/07/2026 18:40</td>
-                <td className="px-3 py-2.5">
-                  <button
-                    type="button"
-                    title="Ver detalle"
-                    className="inline-flex h-8 w-8 items-center justify-center rounded-md bg-blue-600 text-white hover:bg-blue-700"
-                  >
-                    <MdVisibility className="text-base" />
-                  </button>
-                </td>
-              </tr>
+                    <td className="px-3 py-2.5">
+                      {
+                        item.estado
+                      }
+                    </td>
+                    <td className="px-3 py-2.5 ">{item.fechaInicio}</td>
+                    <td className="px-3 py-2.5 ">{item.usuario}</td>
+                    <td className="px-3 py-2.5 ">Bs {item.montoInicial}</td>
+                    <td className="px-3 py-2.5 ">Bs {item.montoPago}</td>
+                    <td className="px-3 py-2.5">Bs {item.montoTotal}</td>
+                    <td className="px-3 py-2.5 ">{item.CantidadPagos}</td>
+                    <td className="px-3 py-2.5 ">{item.fechaFin}</td>
+                    <td className="px-3 py-2.5">
+                      <button
+                        type="button"
+                        title="Ver detalle"
+                        className="inline-flex h-8 w-8 items-center justify-center rounded-md bg-blue-600 text-white hover:bg-blue-700"
+                      >
+                        <MdVisibility className="text-base" />
+                      </button>
+                    </td>
+                  </tr>
+                ))
+              }
             </tbody>
           </table>
         </div>

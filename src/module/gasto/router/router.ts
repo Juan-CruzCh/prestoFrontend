@@ -2,6 +2,7 @@ import type { RouterI } from "../../../core/interface/router";
 import { CrearGastoPage } from "../page/CrearGastoPage";
 import { ListarGastosPage } from "../page/ListarGastosPage";
 import { DetallleGasto } from "../page/DetallleGasto";
+import { ListarCategoriaGasto } from "../page/ListarCategoriaGasto";
 
 export const gastoRouter: RouterI[] = [
    {
@@ -15,5 +16,9 @@ export const gastoRouter: RouterI[] = [
    {
       element: DetallleGasto,
       path: '/gastos/detalle'
+   },
+   {
+      element: ListarCategoriaGasto,
+      path: '/gastos/categorias'
    }
 ];

@@ -1,13 +1,23 @@
 export interface CategoriaGastoI {
-  _id: string;
+  _id?: string;
   nombre: string;
 }
 
+
+
 export interface CrearGastoI {
-  categoriaId: string;
+  categoriaGasto: string;
   monto: number;
   descripcion: string;
+  comprobante: string;
+}
+
+
+export interface listarGastoI extends CrearGastoI {
+  _id: string;
+  codigo: string;
   fecha: string;
-  numeroComprobante: string;
-  observacion: string;
+  usuario: string;
+  cajaChica: string;
+  tipo: string;
 }
