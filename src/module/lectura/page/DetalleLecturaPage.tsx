@@ -130,7 +130,7 @@ export default function DetalleLecturaPage() {
 
             <div className="mt-4 text-center">
                 <button
-                    className="px-4 py-2 bg-blue-600 text-white rounded-lg"
+                    className="px-4 py-2 bg-sky-700 text-white rounded-lg hover:bg-sky-800"
                     onClick={() => window.print()}
                 >
                     Imprimir Recibo

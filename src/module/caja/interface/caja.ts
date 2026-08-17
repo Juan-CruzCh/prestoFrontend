@@ -11,7 +11,7 @@ export interface cajaUsuarioI {
     fechaFin: string;
     fecha: string;
     flag: string;
-    CantidadPagos: number
+    cantidadPagos: number
 
 }
 

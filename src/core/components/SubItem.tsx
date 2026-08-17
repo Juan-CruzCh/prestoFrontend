@@ -10,9 +10,9 @@ interface Props {
 export const SubItem = ({ to, icon, text }: Props) => (
     <Link
         to={to}
-        className="flex items-center gap-2.5 rounded-lg px-3 py-2 text-sm text-slate-600 transition-colors hover:bg-slate-100 hover:text-blue-700"
+        className="flex items-center gap-2.5 rounded-lg px-3 py-2 text-sm text-sky-100/90 transition-colors hover:bg-sky-700 hover:text-white"
     >
-        <span className="text-base text-slate-400">{icon}</span>
+        <span className="text-base text-cyan-200">{icon}</span>
         <span>{text}</span>
     </Link>
 )

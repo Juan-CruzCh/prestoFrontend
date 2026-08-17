@@ -31,7 +31,7 @@ export const ListarCajaChica = () => {
           </div>
           <button
             type="button"
-            className="rounded bg-slate-800 px-3 py-1.5 text-xs text-white hover:bg-slate-700"
+            className="rounded bg-sky-700 px-3 py-1.5 text-xs text-white hover:bg-sky-800"
           >
             Buscar
           </button>
@@ -70,7 +70,7 @@ export const ListarCajaChica = () => {
                   <button
                     type="button"
                     title="Ver detalle"
-                    className="inline-flex h-6 w-6 items-center justify-center rounded bg-slate-700 text-white hover:bg-slate-800"
+                    className="inline-flex h-6 w-6 items-center justify-center rounded bg-sky-700 text-white hover:bg-sky-800"
                   >
                     <MdVisibility className="text-sm" />
                   </button>
@@ -90,7 +90,7 @@ export const ListarCajaChica = () => {
                   <button
                     type="button"
                     title="Ver detalle"
-                    className="inline-flex h-6 w-6 items-center justify-center rounded bg-slate-700 text-white hover:bg-slate-800"
+                    className="inline-flex h-6 w-6 items-center justify-center rounded bg-sky-700 text-white hover:bg-sky-800"
                   >
                     <MdVisibility className="text-sm" />
                   </button>
@@ -110,7 +110,7 @@ export const ListarCajaChica = () => {
                   <button
                     type="button"
                     title="Ver detalle"
-                    className="inline-flex h-6 w-6 items-center justify-center rounded bg-slate-700 text-white hover:bg-slate-800"
+                    className="inline-flex h-6 w-6 items-center justify-center rounded bg-sky-700 text-white hover:bg-sky-800"
                   >
                     <MdVisibility className="text-sm" />
                   </button>

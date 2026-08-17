@@ -213,7 +213,7 @@ export const RealizarPagoPage = () => {
           <div className="flex justify-end">
             <button
               onClick={btnRealizarPago}
-              className="bg-gradient-to-r from-blue-600 to-blue-700 text-white px-10 py-3 rounded-xl font-semibold shadow-lg hover:scale-105 transition"
+              className="bg-gradient-to-r from-sky-700 to-cyan-700 text-white px-10 py-3 rounded-xl font-semibold shadow-lg hover:scale-105 transition"
             >
               Realizar Pago
             </button>

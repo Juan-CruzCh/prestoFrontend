@@ -133,7 +133,7 @@ export const ListarPagosPage = () => {
             <th className="px-2 py-1">
               <button
                 onClick={() => listar()}
-                className="bg-blue-500 text-white px-3 py-1 rounded text-sm w-full">
+                className="bg-sky-700 text-white px-3 py-1 rounded text-sm w-full hover:bg-sky-800">
                 Buscar
               </button>
             </th>
@@ -199,7 +199,7 @@ export const ListarPagosPage = () => {
               <td className="px-4 py-2">
                 <button
                   onClick={() => navigate(`/pago/detalle/${item._id}`)}
-                  className="bg-blue-600 text-white px-3 py-1 rounded text-xs">
+                  className="bg-sky-700 text-white px-3 py-1 rounded text-xs hover:bg-sky-800">
                   Ver Recibo
                 </button>
               </td>

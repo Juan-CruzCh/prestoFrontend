@@ -38,7 +38,7 @@ export const VerCaja = () => {
         montoInicial={caja?.montoInicial ?? 0}
         montoActual={caja?.montoPago ?? 0}
         montoTotal={caja?.montoTotal ?? 0}
-        cantidadPagos={caja?.CantidadPagos ?? 0}
+        cantidadPagos={caja?.cantidadPagos ?? 0}
       />
 
       <Caja

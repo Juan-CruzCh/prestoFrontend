@@ -19,6 +19,7 @@ import {
 import { Link, Outlet } from "react-router";
 import { useAuthStore } from "../context/auth";
 import { VerCaja } from "../../module/caja/components/VerCajas";
+import escudoPresto from "../../assets/logo/escudo.png";
 
 const cerrarSession = () => console.log("logout");
 
@@ -53,25 +54,26 @@ export const Menu: React.FC = () => {
 
           {/* SIDEBAR */}
           <aside
-            className={`fixed top-16 left-0 w-72 h-[calc(100%-64px)] bg-white border-r border-slate-200 shadow-xl flex flex-col transition-transform duration-300 ease-out z-50
+            className={`fixed top-16 left-0 w-72 h-[calc(100%-64px)] bg-sky-800 border-r border-sky-700 shadow-xl flex flex-col transition-transform duration-300 ease-out z-50
         ${drawerOpen ? "translate-x-0" : "-translate-x-full"}`}
           >
 
-            <div className="border-b border-slate-100 px-4 py-4">
-              {/* Espacio para logo — reemplazar el div por <img src="..." alt="Logo" className="h-9 w-auto" /> */}
-              <div className="mb-3 flex h-10 w-10 items-center justify-center rounded-lg bg-slate-100 text-[10px] font-medium uppercase tracking-wide text-slate-400">
-                Logo
-              </div>
-              <p className="truncate text-sm text-slate-600">
+            <div className="border-b border-sky-700 px-4 py-4">
+              <img
+                src={escudoPresto}
+                alt="Presto"
+                className="mb-3 h-10 w-auto object-contain"
+              />
+              <p className="truncate text-sm text-sky-50">
                 {usuario.nombre} {usuario.apellidoMaterno}
               </p>
-              <p className="mt-0.5 text-xs text-slate-400">{usuario.rol}</p>
+              <p className="mt-0.5 text-xs text-sky-200/90">{usuario.rol}</p>
             </div>
 
             <nav className="flex-1 overflow-y-auto px-2 py-2 space-y-0.5">
               {(usuario.rol === "ADMINISTRADOR" || usuario.rol === "LECTURADOR") && (
-                <Link to="/inicio" className="flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium text-slate-700 transition-colors hover:bg-blue-50 hover:text-blue-700">
-                  <MdDashboard className="text-xl text-slate-500" />
+                <Link to="/inicio" className="flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium text-sky-50 transition-colors hover:bg-sky-700 hover:text-white">
+                  <MdDashboard className="text-xl text-cyan-200" />
                   <span>Dashboard</span>
                 </Link>
               )}
@@ -133,6 +135,21 @@ export const Menu: React.FC = () => {
                 </MenuGroup>
               )}
 
+              {usuario.rol === "ADMINISTRADOR" && (
+                <MenuGroup
+                  name="Caja"
+                  icon={<MdAccountBalanceWallet className="text-xl" />}
+                  title="Caja"
+                  toggleSubmenu={toggleSubmenu}
+                  expandedMenus={expandedMenus}
+                >
+                  <SubItem to="/listar/caja" icon={<MdAdd />} text="listar caja" />
+                  <SubItem to="/cerrar/caja" icon={<MdAdd />} text="Cerra caja" />
+                  <SubItem to="/listar/caja/chica" icon={<MdList />} text="Listar caja chica" />
+                    <SubItem to="/cerrar/caja/chica" icon={<MdList />} text="Cerra caja chica" />
+                </MenuGroup>
+              )}
+
               {/* PAGOS */}
               {usuario.rol === "ADMINISTRADOR" && (
                 <MenuGroup
@@ -148,17 +165,17 @@ export const Menu: React.FC = () => {
               )}
 
               {usuario.rol === "ADMINISTRADOR" && (
-                <Link to="/usuario/listar" className="flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium text-slate-700 transition-colors hover:bg-blue-50 hover:text-blue-700">
-                  <MdGroup className="text-xl text-slate-500" />
+                <Link to="/usuario/listar" className="flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium text-sky-50 transition-colors hover:bg-sky-700 hover:text-white">
+                  <MdGroup className="text-xl text-cyan-200" />
                   <span>Usuarios</span>
                 </Link>
               )}
             </nav>
 
-            <div className="border-t border-slate-100 p-2">
+            <div className="border-t border-sky-700 p-2">
               <button
                 onClick={cerrarSession}
-                className="flex w-full items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium text-red-600 transition-colors hover:bg-red-50"
+                className="flex w-full items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium text-red-200 transition-colors hover:bg-red-500/20 hover:text-red-100"
               >
                 <MdLogout className="text-xl" />
                 <span>Cerrar sesión</span>
@@ -169,7 +186,7 @@ export const Menu: React.FC = () => {
 
           {/* MAIN */}
           <div className="flex-1 flex flex-col h-full w-full">
-            <header className="flex h-16 items-center bg-linear-to-r from-blue-600 to-blue-700 text-white px-4 shadow-md">
+            <header className="flex h-16 items-center bg-linear-to-r from-sky-800 via-sky-700 to-cyan-700 text-white px-4 shadow-md">
               <button
                 onClick={toggleDrawer}
                 className="mr-3 rounded-lg p-1.5 transition-colors hover:bg-white/15"
@@ -177,10 +194,11 @@ export const Menu: React.FC = () => {
                 <MdMenu className="text-2xl" />
               </button>
 
-              {/* Mismo logo del sidebar cuando lo agregues */}
-              <div className="mr-2 flex h-8 w-8 items-center justify-center rounded-md bg-white/15 text-[9px] font-medium uppercase tracking-wide text-white/70">
-                Logo
-              </div>
+              <img
+                src={escudoPresto}
+                alt="Presto"
+                className="mr-2 h-8 w-auto object-contain"
+              />
               <h1 className="text-base font-medium text-white/90">
                 Sistema de Agua
               </h1>

@@ -50,7 +50,7 @@ export const CrearClienteModal = ({ setCliente
     return (
         <>
             <button
-                className="bg-blue-600 text-white px-4 py-2 rounded"
+                className="bg-sky-700 text-white px-4 py-2 rounded hover:bg-sky-800"
                 onClick={abrirModal}
             >
                 Crear Cliente
@@ -152,7 +152,7 @@ export const CrearClienteModal = ({ setCliente
 
                             <button
                                 type="submit"
-                                className="px-4 py-2 bg-blue-600 text-white rounded"
+                                className="px-4 py-2 bg-sky-700 text-white rounded hover:bg-sky-800"
                             >
                                 Guardar
                             </button>

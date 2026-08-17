@@ -87,12 +87,15 @@ export const RealizarLecturaPage = () => {
 
             try {
                 const response = await registrarLectura(data);
+                console.log(response);
+                
                 if (response) {
                     navigate(`/lectura/detalle/${response.medidor}/${response.lectura}`);
                 }
             } catch (err) {
                 const e = err as AxiosError<any>
-
+                console.log(e.response);
+                
                 if (e.status == HttpStatus.CONFLICT) {
                     advertencia(e.response?.data.mensaje);
                 } else if (e.status == HttpStatus.BAD_REQUEST) {
@@ -139,7 +142,7 @@ export const RealizarLecturaPage = () => {
                         <button
                             type="button"
                             onClick={buscarMedidor}
-                            className="shrink-0 rounded-lg bg-blue-600 px-5 py-2.5 text-sm font-medium text-white transition-colors hover:bg-blue-700"
+                            className="shrink-0 rounded-lg bg-sky-700 px-5 py-2.5 text-sm font-medium text-white transition-colors hover:bg-sky-800"
                         >
                             Buscar
                         </button>
@@ -243,7 +246,7 @@ export const RealizarLecturaPage = () => {
                     <div className="flex justify-end">
                         <button
                             type="submit"
-                            className="w-full rounded-lg bg-blue-600 px-6 py-2.5 text-sm font-medium text-white transition-colors hover:bg-blue-700 sm:w-auto"
+                            className="w-full rounded-lg bg-sky-700 px-6 py-2.5 text-sm font-medium text-white transition-colors hover:bg-sky-800 sm:w-auto"
                         >
                             Guardar
                         </button>

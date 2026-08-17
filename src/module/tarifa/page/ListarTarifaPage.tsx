@@ -53,7 +53,7 @@ export const ListarTarifaPage: React.FC = () => {
         <h1 className="text-2xl font-semibold text-gray-800">Listado de Tarifas</h1>
         <button
           onClick={() => navigate("/tarifa/crear")}
-          className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md"
+          className="bg-sky-700 hover:bg-sky-800 text-white px-4 py-2 rounded-md"
         >
           Crear Tarifa
         </button>

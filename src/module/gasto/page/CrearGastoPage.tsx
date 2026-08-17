@@ -173,7 +173,7 @@ export const CrearGastoPage = () => {
         <div className="mt-6 flex flex-wrap gap-3 border-t border-slate-100 pt-5">
           <button
             type="submit"
-            className="rounded-lg bg-blue-600 px-5 py-2.5 text-sm font-medium text-white transition-colors hover:bg-blue-700"
+            className="rounded-lg bg-sky-700 px-5 py-2.5 text-sm font-medium text-white transition-colors hover:bg-sky-800"
           >
             Guardar gasto
           </button>

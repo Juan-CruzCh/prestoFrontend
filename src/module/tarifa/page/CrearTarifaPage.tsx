@@ -118,7 +118,7 @@ export const CrearTarifaPage = () => {
 
           <button
             type="submit"
-            className="mt-4 bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700"
+            className="mt-4 bg-sky-700 text-white px-4 py-2 rounded-md hover:bg-sky-800"
           >
             Añadir Rango
           </button>
@@ -164,7 +164,7 @@ export const CrearTarifaPage = () => {
       {/* Guardar Tarifa */}
       <button
         onClick={handleSubmit(guardarTarifa)}
-        className="w-full bg-green-600 hover:bg-green-700 text-white py-2 rounded-md text-lg font-medium mt-4"
+        className="w-full bg-sky-700 hover:bg-sky-800 text-white py-2 rounded-md text-lg font-medium mt-4"
       >
         Guardar Tarifa
       </button>

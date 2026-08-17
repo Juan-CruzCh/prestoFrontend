@@ -99,7 +99,7 @@ export const ListarMorososPage = () => {
                     </select>
                   </th>
                   <th>
-                    <button onClick={btnBuscar} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Buscar</button>
+                    <button onClick={btnBuscar} className="bg-sky-700 hover:bg-sky-800 text-white font-bold py-2 px-4 rounded">Buscar</button>
                   </th>
                 </tr>
                 <tr>

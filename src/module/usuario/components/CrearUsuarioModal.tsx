@@ -52,7 +52,7 @@ export const CrearUsuarioModal = () => {
         <>
 
             <button
-                className="bg-blue-600 text-white px-4 py-2 rounded"
+                className="bg-sky-700 text-white px-4 py-2 rounded hover:bg-sky-800"
                 onClick={openModal}
             >
                 Nuevo
@@ -195,7 +195,7 @@ export const CrearUsuarioModal = () => {
                             <div className="flex justify-end">
                                 <button
                                     type="submit"
-                                    className="px-6 py-2 bg-blue-600 text-white rounded"
+                                    className="px-6 py-2 bg-sky-700 text-white rounded hover:bg-sky-800"
                                 >
                                     Guardar
                                 </button>

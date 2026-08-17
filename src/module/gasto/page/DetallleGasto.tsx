@@ -58,7 +58,7 @@ export const DetallleGasto = () => {
       <div className="mt-4 flex gap-2">
         <button
           type="button"
-          className="rounded bg-blue-600 px-4 py-2 text-sm text-white hover:bg-blue-700"
+          className="rounded bg-sky-700 px-4 py-2 text-sm text-white hover:bg-sky-800"
         >
           Imprimir
         </button>

@@ -193,7 +193,7 @@ export const DetallePagoPage = () => {
             <div className="text-center my-6">
                 <button
                     onClick={imprimirRecibo}
-                    className="bg-black text-white px-10 py-4 rounded-lg font-bold uppercase shadow-lg"
+                    className="bg-sky-700 text-white px-10 py-4 rounded-lg font-bold uppercase shadow-lg hover:bg-sky-800"
                 >
                     Imprimir Recibo
                 </button>

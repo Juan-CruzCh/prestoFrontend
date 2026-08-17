@@ -89,7 +89,7 @@ export const ListarLecturasPage = () => {
                 />
                 <button
                     onClick={() => listarLecturasRegistradas(fechaInicio, fechaFin)}
-                    className="flex items-center justify-center gap-2 rounded-lg bg-blue-600 px-4 py-2 text-sm font-semibold text-white hover:bg-blue-700 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-300"
+                    className="flex items-center justify-center gap-2 rounded-lg bg-sky-700 px-4 py-2 text-sm font-semibold text-white hover:bg-sky-800 transition-colors focus:outline-none focus:ring-2 focus:ring-sky-300"
                 >
                     🔍 Buscar
                 </button>
@@ -127,7 +127,7 @@ export const ListarLecturasPage = () => {
                                 </button>
                                 <button
                                     onClick={() => navigate(`/lectura/detalle/${item.idMedidor}/${item._id}`)}
-                                    className="bg-green-700 text-white px-2 py-1 rounded hover:bg-green-800 text-xs"
+                                    className="bg-sky-700 text-white px-2 py-1 rounded hover:bg-sky-800 text-xs"
                                 >
                                     Recibo
                                 </button>

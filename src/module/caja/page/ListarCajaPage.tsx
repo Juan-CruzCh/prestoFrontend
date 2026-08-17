@@ -58,7 +58,7 @@ export const ListarCajaPage = () => {
           </div>
           <button
             type="button"
-            className="rounded-lg bg-blue-600 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-blue-700"
+            className="rounded-lg bg-sky-700 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-sky-800"
           >
             Buscar
           </button>
@@ -119,13 +119,13 @@ export const ListarCajaPage = () => {
                     <td className="px-3 py-2.5 ">Bs {item.montoInicial}</td>
                     <td className="px-3 py-2.5 ">Bs {item.montoPago}</td>
                     <td className="px-3 py-2.5">Bs {item.montoTotal}</td>
-                    <td className="px-3 py-2.5 ">{item.CantidadPagos}</td>
+                    <td className="px-3 py-2.5 ">{item.cantidadPagos}</td>
                     <td className="px-3 py-2.5 ">{item.fechaFin}</td>
                     <td className="px-3 py-2.5">
                       <button
                         type="button"
                         title="Ver detalle"
-                        className="inline-flex h-8 w-8 items-center justify-center rounded-md bg-blue-600 text-white hover:bg-blue-700"
+                        className="inline-flex h-8 w-8 items-center justify-center rounded-md bg-sky-700 text-white hover:bg-sky-800"
                       >
                         <MdVisibility className="text-base" />
                       </button>
