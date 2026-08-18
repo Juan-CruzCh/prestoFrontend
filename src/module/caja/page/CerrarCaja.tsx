@@ -1,4 +1,22 @@
+import { useEffect } from "react";
+import { verCajaPorUsuarioConSusPagos } from "../service/caja";
+
 export const CerrarCaja = () => {
+  useEffect(() => {
+
+    (async () => {
+      try {
+        const response = await verCajaPorUsuarioConSusPagos()
+        console.log(response);
+
+      } catch (error) {
+        console.log(error);
+
+      }
+
+    })()
+
+  }, [])
   return (
     <div className="mx-auto max-w-6xl">
       <h1 className="mb-4 text-lg font-semibold text-slate-800">Cerrar caja</h1>

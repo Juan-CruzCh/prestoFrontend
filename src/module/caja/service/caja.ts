@@ -16,4 +16,9 @@ export async function listarCajas(): Promise<cajaUsuarioI[]> {
     const response = await instance.get('caja/listar')
     return response.data
 }
+export async function verCajaPorUsuarioConSusPagos(): Promise<cajaUsuarioI[]> {
+    const response = await instance.get('verCajaPorUsuarioConSusPagos')
+    return response.data
+}
+
 
