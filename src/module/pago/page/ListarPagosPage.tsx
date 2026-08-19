@@ -9,7 +9,7 @@ import { HttpStatus } from "../../../core/enum/httpSatatus";
 export const ListarPagosPage = () => {
   const navigate = useNavigate();
 
-  // filtros
+
   const [codigo, setCodigo] = useState("");
   const [ci, setCi] = useState("");
   const [nombre, setNombre] = useState("");
@@ -20,7 +20,7 @@ export const ListarPagosPage = () => {
   const [fechaFin, setFechaFin] = useState("");
   const [disableRangoFechas, setDisableRangoFechas] = useState(false);
 
-  // datos
+
   const [pagos, setPagos] = useState<ListarPagos[]>([]);
   const [paginas, setPaginas] = useState(0);
   const [pagina, setPagina] = useState(1);

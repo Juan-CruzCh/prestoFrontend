@@ -1,6 +1,7 @@
 import type { AxiosResponse } from "axios";
 import { instance } from "../../../core/config/instanceAxios";
 import type { cajaUsuarioI, listarCajaPorUsuarioI } from "../interface/caja";
+import type { ListarPagos } from "../../pago/interface/pago";
 
 export async function CrearCaja(montoInicial: number): Promise<AxiosResponse> {
     const response = await instance.post('abrir/caja', { montoInicial })
@@ -21,6 +22,11 @@ export async function listarCajas(): Promise<cajaUsuarioI[]> {
 }
 export async function verCajaPorUsuarioConSusPagos(): Promise<listarCajaPorUsuarioI> {
     const response = await instance.get('verCajaPorUsuarioConSusPagos')
+    return response.data
+}
+
+export async function listarPagosPorCaja(caja:string): Promise<ListarPagos[]> {
+    const response = await instance.get(`pago/caja/detalle/${caja}`)
     return response.data
 }
 

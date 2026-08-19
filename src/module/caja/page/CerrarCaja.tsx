@@ -2,18 +2,19 @@ import { useEffect, useState } from "react";
 import { cerrarCaja, verCajaPorUsuarioConSusPagos } from "../service/caja";
 import type { listarCajaPorUsuarioI } from "../interface/caja";
 import { AxiosError, HttpStatusCode } from "axios";
-import { AlertaError } from "../../../core/utils/alertasUtils";
+import { AlertaError, exito } from "../../../core/utils/alertasUtils";
 
 export const CerrarCaja = () => {
   const [caja, setCaja] = useState<listarCajaPorUsuarioI>()
+  
   const [monto, setMonto] = useState<number>(0)
-
   useEffect(() => {
-
     (async () => {
       try {
         const response = await verCajaPorUsuarioConSusPagos()
-        setCaja(response);
+        if (response.codigo) {
+          setCaja(response);
+        }
       } catch (error) {
         console.log(error);
       }
@@ -21,16 +22,13 @@ export const CerrarCaja = () => {
   }, [])
   const btnCerraCaja = async () => {
     try {
-      console.log('e');
-
       const response = await cerrarCaja(monto)
       if (response.status == HttpStatusCode.Ok) {
-        alert('caja cerrajada')
+        exito("Caja cerrada")
       }
     } catch (error) {
       const e = error as AxiosError<{ mensaje: string }>
       AlertaError(e.response?.data.mensaje ?? 'Error')
-
     }
   }
   return (
@@ -101,7 +99,7 @@ export const CerrarCaja = () => {
 
             <div className="flex flex-col gap-2 sm:flex-row lg:flex-col">
               <button
-                onClick={ btnCerraCaja }
+                onClick={btnCerraCaja}
                 type="button"
                 className="rounded bg-slate-800 px-4 py-2 text-sm text-white hover:bg-slate-700"
               >

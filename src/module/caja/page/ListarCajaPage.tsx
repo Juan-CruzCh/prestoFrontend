@@ -2,10 +2,11 @@ import { useEffect, useState } from "react";
 import { MdVisibility } from "react-icons/md";
 import type { cajaUsuarioI } from "../interface/caja";
 import { listarCajas } from "../service/caja";
+import { useNavigate } from "react-router";
 
 export const ListarCajaPage = () => {
   const [cajas, setcajas] = useState<cajaUsuarioI[]>([])
-
+  const navigate = useNavigate()
   useEffect(() => {
     (async () => {
       try {
@@ -123,6 +124,9 @@ export const ListarCajaPage = () => {
                     <td className="px-3 py-2.5 ">{item.fechaFin}</td>
                     <td className="px-3 py-2.5">
                       <button
+                        onClick={()=>{
+                          navigate(`/listar/pagos/caja/${item._id}`)
+                        }}
                         type="button"
                         title="Ver detalle"
                         className="inline-flex h-8 w-8 items-center justify-center rounded-md bg-sky-700 text-white hover:bg-sky-800"

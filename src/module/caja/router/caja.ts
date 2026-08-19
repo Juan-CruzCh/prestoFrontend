@@ -1,6 +1,7 @@
 import type { RouterI } from "../../../core/interface/router";
 import { CerrarCaja } from "../page/CerrarCaja";
 import { CerrarCajaChica } from "../page/CerrarCajaChica";
+import { DetallePagosCaja } from "../page/DetallePagosCaja";
 import { ListarCajaChica } from "../page/ListarCajaChica";
 import { ListarCajaPage } from "../page/ListarCajaPage";
 
@@ -20,5 +21,9 @@ export const cajaRouter: RouterI[] = [
     {
         element: ListarCajaChica,
         path: '/listar/caja/chica'
+    },
+    {
+        element: DetallePagosCaja,
+        path: '/listar/pagos/caja/:id'
     }
 ];
